@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %} - Home {% endblock %}
+
+{% block content %}
+  <div class="container pt">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 centered">
+        <h1>A Large Scale Machine Learning Toolbox</h1>
+        <p align="justify">
+          <img src="{{ url_for( 'static', filename='img/shogun_logo.png') }}" border="0" align="left"/> Shogun's focus is on large scale kernel methods and especially on Support Vector Machines (SVM). It provides a generic SVM object interfacing to several different SVM implementations, among them the state of the art <a href="http://cmp.felk.cvut.cz/~xfrancv/ocas/html/index.html" target="_blank">OCAS</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/" target="_blank">Liblinear</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/" target="_blank">LibSVM</a>, <a href="http://svmlight.joachims.org/" target="_blank">SVMLight</a>, <a href="http://vikas.sindhwani.org/svmlin.html" target="_blank">SVMLin</a> and <a href="http://dm.unife.it/gpdt/" target="_blank">GPDT</a>.
+        </p>
+        <p align="justify">
+          Each of the SVMs can be combined with a variety of kernels. The toolbox not only provides efficient implementations of the most common kernels, like the Linear, Polynomial, Gaussian and Sigmoid Kernel but also comes with a number of recent string kernels as e.g. the Locality Improved, Fischer, TOP, Spectrum, Weighted Degree Kernel (with shifts). For the latter the efficient LINADD optimizations are implemented. For linear  SVMs the COFFIN framework allows for on-demand computing feature spaces on-the-fly, even allowing to mix sparse, dense and other data types.
+        </p>
+        <p align="justify">
+          Furthermore, SHOGUN offers the freedom of working with custom pre-computed kernels.  One of its key features is the <em>combined kernel</em> which can be constructed by a weighted linear combination of a number of sub-kernels, each of which not necessarily working on the same domain. An optimal sub-kernel weighting can be learned using <a href="http://www.fml.tuebingen.mpg.de/raetsch/projects/lsmkl" target="_blank">Multiple Kernel Learning</a>. Currently SVM one-class, 2-class and multiclass classification and regression problems can be dealt with.
+        </p>
+        <p align="justify">
+          SHOGUN also implements a number of linear methods like Linear Discriminant Analysis (LDA), Linear Programming Machine (LPM), (Kernel) Perceptrons and features algorithms to train hidden markov models. The input feature-objects can be dense, sparse or strings and of type int/short/double/char and can be converted into  different feature types. Chains of <em>preprocessors</em> (e.g. substracting the mean) can be attached to each feature object allowing for on-the-fly pre-processing.
+        </p>
+        <p align="justify">
+          SHOGUN is implemented in C++ with interfaces to Matlab(tm), R, Octave and Python and is proudly released as <a href="http://mloss.org" target="_blank">Machine Learning Open Source Software</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container pt">
+    <div class="row mt">
+      <div class="col-lg-4">
+        <h2>Shogun Features</h2>
+        <p align="justify">
+          <strong>A large scale machine learning toolbox.</strong>
+          <br>
+          SHOGUN is designed for unified large-scale learning for a broad range of feature
+          types and learning settings, like classification, regression, or explorative data analysis.
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h2>GSOC 2014</h2>
+        <p align="justify">
+          <strong>We have applied as a mentoring org.<br></strong>
+          Our list of project ideas this year is full of exciting and fun
+          projects. There is also a new guide for prospective students. Let's now keep
+          our fingers crossed until accepted mentoring orgs are announced!
+        </p>
+      </div>
+
+      <div class="col-lg-4">
+        <h2>EUROPYTHON 2014</h2>
+        <p align="justify">
+          <strong>SHOGUN talk in Berlin.<br></strong>
+          SHOGUN will be presented next July at the Europython conference in Berlin. The talk will be of interest both to people that do not know about SHOGUN and are interested in using it or just getting an introduction, as well as for people with prior experience using SHOGUN.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container pt">
+    <div class="row">
+      <div id="NotebookCarousel" class="carousel slide">
+
+          <ol class="carousel-indicators">
+            <li data-target="#NotebookCarousel" data-slide-to="0" class="active"></li>
+            {% for set in notebook_sets %}
+              {% if loop.index > 1 %}
+                <li data-target="#NotebookCarousel" data-slide-to="{{loop.index}}"></li>
+              {% endif %}
+            {% endfor %}
+           </ol>
+
+          <div class="carousel-inner">
+            {% for set in notebook_sets %}
+              {% if loop.index == 1 %}
+                <div class="active item">
+              {% else %}
+                <div class="item">
+              {% endif %}
+
+              <div class="row-fluid">
+                {% for notebook in set %}
+                  <div class="col-lg-3">
+                    <a class="overlay" href="{{notebook.0|safe}}">
+                      <img src="{{notebook.1|safe}}" alt="" style="width:260px; height:200px"/>
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#NotebookCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#NotebookCarousel" data-slide="next">&rsaquo;</a>
+      </div>
+    </div>
+  </div>
+
+  <script type='text/javascript'>
+  $(document).ready(function() {
+      $('.carousel').carousel({
+          interval: 4000
+      })
+  });
+  </script>
+{% endblock %}
