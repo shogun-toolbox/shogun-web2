@@ -23,15 +23,18 @@ SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
 # controllers
 @app.route('/')
 def index():
-  # group notebooks and demos in sets of 4 for the carousel
   notebooks = get_notebooks()
   demos = get_demos()
   all_entries = notebooks + demos
-  sets = []
-  for i in xrange(0,len(all_entries),4):
-    sets.append(all_entries[i:(i+4)])
 
-  return render_template('index.html', notebook_sets=sets)
+  top_carousel = all_entries
+
+  # group notebooks and demos in sets of 4 for the bottom carousel
+  bottom_carousel = []
+  for i in xrange(0,len(all_entries),4):
+    bottom_carousel.append(all_entries[i:(i+4)])
+
+  return render_template('home.html', top_carousel=top_carousel, bottom_carousel=bottom_carousel)
 
 
 @app.route('/about')

@@ -4,9 +4,66 @@
 
 {% block content %}
   <div class="container pt">
+
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 centered">
         <h1>A Large Scale Machine Learning Toolbox</h1>
+      </div>
+    </div>
+
+    <div class="row mt">
+      <div class="col-lg-6">
+        <div id="TopCarousel" class="carousel slide">
+
+          <ol class="carousel-indicators">
+            <li data-target="#TopCarousel" data-slide-to="0" class="active"></li>
+            {% for notebook in top_carousel %}
+              {% if loop.index > 1 %}
+                <li data-target="#TopCarousel" data-slide-to="{{loop.index}}"></li>
+              {% endif %}
+            {% endfor %}
+           </ol>
+
+          <div class="carousel-inner">
+            {% for notebook in top_carousel %}
+              {% if loop.index == 1 %}
+                <div class="active item">
+              {% else %}
+                <div class="item">
+              {% endif %}
+              <a class="overlay" href="{{notebook.0|safe}}">
+                <img src="{{notebook.1|safe}}" alt="" style="width:460px; height:400px"/>
+              </a>
+            </div>
+            {% endfor %}
+          </div>
+
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#TopCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#TopCarousel" data-slide="next">&rsaquo;</a>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+      </div>
+
+      <div class="col-lg-4">
+        <h2>News</h2>
+        <ul>
+          <li>Shogun at London Machine Learning</li>
+          <li>Shogun Will be at Europython</li>
+          <li>Google Summer of Code is Underway!</li>
+          <li>Shogun 3.2 released!</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="container pt">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 centered">
         <p align="justify">
           <img src="{{ url_for( 'static', filename='img/shogun_logo.png') }}" border="0" align="left"/> Shogun's focus is on large scale kernel methods and especially on Support Vector Machines (SVM). It provides a generic SVM object interfacing to several different SVM implementations, among them the state of the art <a href="http://cmp.felk.cvut.cz/~xfrancv/ocas/html/index.html" target="_blank">OCAS</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/" target="_blank">Liblinear</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/" target="_blank">LibSVM</a>, <a href="http://svmlight.joachims.org/" target="_blank">SVMLight</a>, <a href="http://vikas.sindhwani.org/svmlin.html" target="_blank">SVMLin</a> and <a href="http://dm.unife.it/gpdt/" target="_blank">GPDT</a>.
         </p>
@@ -64,19 +121,19 @@
 
   <div class="container pt">
     <div class="row">
-      <div id="NotebookCarousel" class="carousel slide">
+      <div id="BottomCarousel" class="carousel slide">
 
           <ol class="carousel-indicators">
-            <li data-target="#NotebookCarousel" data-slide-to="0" class="active"></li>
-            {% for set in notebook_sets %}
+            <li data-target="#BottomCarousel" data-slide-to="0" class="active"></li>
+            {% for set in bottom_carousel %}
               {% if loop.index > 1 %}
-                <li data-target="#NotebookCarousel" data-slide-to="{{loop.index}}"></li>
+                <li data-target="#BottomCarousel" data-slide-to="{{loop.index}}"></li>
               {% endif %}
             {% endfor %}
            </ol>
 
           <div class="carousel-inner">
-            {% for set in notebook_sets %}
+            {% for set in bottom_carousel %}
               {% if loop.index == 1 %}
                 <div class="active item">
               {% else %}
@@ -97,8 +154,8 @@
           </div>
 
           <!-- Carousel nav -->
-          <a class="carousel-control left" href="#NotebookCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#NotebookCarousel" data-slide="next">&rsaquo;</a>
+          <a class="carousel-control left" href="#BottomCarousel" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#BottomCarousel" data-slide="next">&rsaquo;</a>
       </div>
     </div>
   </div>
