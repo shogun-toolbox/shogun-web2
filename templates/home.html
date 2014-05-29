@@ -8,6 +8,10 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 centered">
         <h1>A Large Scale Machine Learning Toolbox</h1>
+        <p align="justify">
+          SHOGUN is designed for unified large-scale learning for a broad range of feature
+          types and learning settings, like classification, regression, or explorative data analysis.
+        </p>
       </div>
     </div>
 
@@ -48,13 +52,34 @@
       </div>
 
       <div class="col-lg-4">
-        <h2>News</h2>
-        <ul>
-          <li>Shogun at London Machine Learning</li>
-          <li>Shogun Will be at Europython</li>
-          <li>Google Summer of Code is Underway!</li>
-          <li>Shogun 3.2 released!</li>
-        </ul>
+        <div class="row">
+          <h2>Latest Release</h2>
+          <strong>Shogun 3.2.0</strong><br>
+          <em>"In $DEITY we trust all others bring data"<em><br><br>
+          <strong>Change Log</strong>
+          <ul>
+            <li>Fully support python3 now</li>
+            <li>Add mini-batch k-means [Parijat Mazumdar]</li>
+            <li>Add k-means++ [Parijat Mazumdar]</li>
+            <li>Add sub-sequence string kernel [lambday]</li>
+          </ul>
+        </div>
+        <div class="row">
+          <h2>Latest Commits</h2>
+          <ul>
+            {% for commit in commits %}
+              <li>{{ commit }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="row">
+          <h2>Latest News</h2>
+          <ul>
+            {% for tweet in tweets %}
+              <li>{{ tweet }}</li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
     </div>
   </div>
@@ -88,12 +113,12 @@
   <div class="container pt">
     <div class="row mt">
       <div class="col-lg-4">
-        <h2>Shogun Features</h2>
+        <h2>Shogun Workshop</h2>
         <p align="justify">
-          <strong>A large scale machine learning toolbox.</strong>
+          <strong>Upcoming Workshop</strong>
           <br>
-          SHOGUN is designed for unified large-scale learning for a broad range of feature
-          types and learning settings, like classification, regression, or explorative data analysis.
+          SHOGUN machine learning workshop 2014 is scheduled for July 28 in Berlin.
+More info coming soon, stay tuned!
         </p>
       </div>
 

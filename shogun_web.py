@@ -1,6 +1,9 @@
 from flask import Flask, render_template, redirect
 from BeautifulSoup import BeautifulSoup
 import os
+import urllib2, urllib
+import json
+import base64
 import calendar
 
 import pdb
@@ -20,6 +23,13 @@ SHOGUN_PLANET = os.path.dirname(os.path.realpath(__file__)) + '/static/planet-in
 #SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
 
+# Twitter API
+# from - https://apps.twitter.com/app/6246983/keys
+TWITTER_KEY = os.environ['TWITTER_KEY'] #HnjNvj7jfNxe7cUoAcN71PqI0
+TWITTER_SECRET = os.environ['TWITTER_SECRET'] #"4kQNDC5d75oEGocAExSY81iMag4ih2gATA1HXwIbNRLrgScfDK"
+BEARERTOKENCREDS = TWITTER_KEY + ':' + TWITTER_SECRET
+B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
+
 # controllers
 @app.route('/')
 def index():
@@ -34,7 +44,13 @@ def index():
   for i in xrange(0,len(all_entries),4):
     bottom_carousel.append(all_entries[i:(i+4)])
 
-  return render_template('home.html', top_carousel=top_carousel, bottom_carousel=bottom_carousel)
+  # recent tweets for news
+  tweets = recent_tweets()
+
+  # recent commits from github
+  commits = recent_commits()
+
+  return render_template('home.html', top_carousel=top_carousel, bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
 
 
 @app.route('/about')
@@ -105,6 +121,63 @@ def get_demos():
     links.append(('http://demos.shogun-toolbox.org/%s' % path[0], '/static/demos/%s' % path[1]))
 
   return links
+
+def recent_commits():
+  url = "https://api.github.com/repos/shogun-toolbox/shogun/commits"
+  request = urllib2.Request(url)
+
+  try:
+    response = urllib2.urlopen(request)
+    raw_data = response.read().decode('utf-8')
+    data = json.loads(raw_data)
+    commits = []
+    for i in range(0,3):
+      message = data[i].get('commit').get('message')
+      commits.append(message)
+    return commits
+  except urllib2.HTTPError, e:
+    print e
+
+def recent_tweets():
+  url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
+  params = {"screen_name": "ShogunToolbox", "exclude_replies": True, "count": 5}
+  full_url = "%s?%s" % (url, urllib.urlencode(params))
+
+  request = urllib2.Request(full_url)
+
+  access_token = auth_twitter()
+  request.add_header('Authorization', 'Bearer %s' % access_token)
+
+  try:
+    response = urllib2.urlopen(request)
+    raw_data = response.read().decode('utf-8')
+    data = json.loads(raw_data)
+    tweets = []
+    for tweet in data:
+      # note to self I can get the hashtags and urls and their string indices to build a proper html string of the tweet
+      tweets.append(tweet['text'])
+    return tweets
+  except urllib2.HTTPError, e:
+    print e
+
+def auth_twitter():
+  url = 'https://api.twitter.com/oauth2/token'
+  header = {}
+  values = {}
+  header['Authorization'] = 'Basic ' + B64BEARERTOKENCREDS
+  header['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+  values['grant_type'] = 'client_credentials'
+
+  data = urllib.urlencode(values)
+  req = urllib2.Request(url, data, header)
+
+  try:
+    response = urllib2.urlopen(req)
+    raw_data = response.read()
+    data = json.loads(raw_data)
+    return data['access_token']
+  except urllib2.HTTPError as e:
+    print e
 
 def get_calendar_irc_logs(logfiles):
   logfiles_set=set(logfiles)
