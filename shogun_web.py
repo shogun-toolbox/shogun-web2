@@ -15,6 +15,7 @@ app.config.update(
 )
 
 # constants
+SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
 NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
 #DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/static/demos"
@@ -33,11 +34,11 @@ B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
 # controllers
 @app.route('/')
 def index():
+  showcase = get_showcase()
+
   notebooks = get_notebooks()
   demos = get_demos()
   all_entries = notebooks + demos
-
-  top_carousel = all_entries
 
   # group notebooks and demos in sets of 4 for the bottom carousel
   bottom_carousel = []
@@ -50,7 +51,7 @@ def index():
   # recent commits from github
   commits = recent_commits()
 
-  return render_template('home.html', top_carousel=top_carousel, bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
+  return render_template('home.html', showcase=showcase, bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
 
 
 @app.route('/about')
@@ -75,11 +76,6 @@ def planet():
   return render_template('planet.html', articles=articles)
 
 
-@app.route('/news')
-def news():
-  return "The News"
-
-
 @app.route('/irclogs')
 def irclogs():
   logfiles = [ f.replace('#shogun.','').replace('.log.html','') for f in os.listdir(SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
@@ -100,6 +96,20 @@ def irclog(date):
 
 
 # utils
+def get_showcase():
+  showcase = []
+  for file in os.listdir(SHOWCASE_DIR):
+    if file.endswith(".desc"):
+      showcase_url = "/static/showcase/" + file[:-5] + ".html"
+      if not os.path.isfile(SHOWCASE_DIR + "/" + file[:-5] + ".html"):
+        showcase_url = "http://demos.shogun-toolbox.org/" + (file[:-5]).replace('_', '/')
+      showcase_abstract = open(SHOWCASE_DIR + "/" + file).read()
+      showcase_image = "/static/showcase/" + file[:-5] + ".png"
+
+      showcase.append([showcase_url, showcase_image, showcase_abstract])
+
+  return showcase
+
 def get_notebooks():
   notebooks = []
   for file in os.listdir(NOTEBOOK_DIR):
