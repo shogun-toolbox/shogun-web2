@@ -3,10 +3,35 @@
   {% block title %} - Planet {% endblock %}
 
   {% block content %}
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("feeds", "1");
 
-  	{% for article in articles %}
-  	{{article|safe}}
-  	 <hr>
-  	{% endfor %}
+       function OnLoad() {
+         // Create a feed control
+         var feedControl = new google.feeds.FeedControl();
+
+        // Add feeds.
+        feedControl.addFeed("http://sonnenburgs.de/soeren/category/blog/feed", "Soeren Sonnenburg")
+        feedControl.addFeed("http://blog.mlsec.org/feeds/posts/default?alt=rss", "Konrad Rieck")
+        feedControl.addFeed("http://mloss.org/community/blog/rss/latest", "mloss.org")
+        feedControl.addFeed("http://mldata.org/blog/rss/latest", "mldata.org")
+        feedControl.addFeed("http://iglesiashogun.wordpress.com/feed/atom", "Fernando Jose Iglesias Garcia")
+        //feedControl.addFeed("http://herrstrathmann.de/google-summer-of-code-blog.feed?type=atom", "Heiko Strathmann")
+        feedControl.addFeed("http://herrstrathmann.de/?format=feed&type=rss", "Heiko Strathmann")
+        feedControl.addFeed("http://notanotherdeardiary.wordpress.com/feed/atom", "Soumyajit De Rahul")
+        feedControl.addFeed("http://foulwall.com/atom.xml", "Zhengyang Liu")
+        feedControl.addFeed("http://kevinhughes.ca/feed/atom", "Kevin Hughes")
+        feedControl.addFeed("http://romanvotyakov.ru/atom.xml", "Roman Votyakov")
+        feedControl.addFeed("http://sergey.lisitsyn.me/atom.xml", "Sergey Lisitsyn")
+
+        // Draw it.
+        feedControl.draw(document.getElementById("google_feeds"));
+      }
+
+      google.setOnLoadCallback(OnLoad);
+    </script>
+
+    <div id="google_feeds"></div>
 
   {% endblock %}
