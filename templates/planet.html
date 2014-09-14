@@ -7,9 +7,9 @@
     <script type="text/javascript">
       google.load("feeds", "1");
       function initialize() {
-        var feed = new google.feeds.Feed("http://404b0012.ngrok.com/feed");
+        var feed = new google.feeds.Feed("http://shogun-planet.herokuapp.com/feed");
+        feed.setNumEntries(20);
         feed.includeHistoricalEntries();
-        feed.setNumEntries(10);
         feed.load(function(result) {
           if (!result.error) {
             var container = document.getElementById("feed");
