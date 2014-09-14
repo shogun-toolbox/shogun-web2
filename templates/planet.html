@@ -6,32 +6,25 @@
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("feeds", "1");
-
-       function OnLoad() {
-         // Create a feed control
-         var feedControl = new google.feeds.FeedControl();
-
-        // Add feeds.
-        feedControl.addFeed("http://sonnenburgs.de/soeren/category/blog/feed", "Soeren Sonnenburg")
-        feedControl.addFeed("http://blog.mlsec.org/feeds/posts/default?alt=rss", "Konrad Rieck")
-        feedControl.addFeed("http://mloss.org/community/blog/rss/latest", "mloss.org")
-        feedControl.addFeed("http://mldata.org/blog/rss/latest", "mldata.org")
-        feedControl.addFeed("http://iglesiashogun.wordpress.com/feed/atom", "Fernando Jose Iglesias Garcia")
-        //feedControl.addFeed("http://herrstrathmann.de/google-summer-of-code-blog.feed?type=atom", "Heiko Strathmann")
-        feedControl.addFeed("http://herrstrathmann.de/?format=feed&type=rss", "Heiko Strathmann")
-        feedControl.addFeed("http://notanotherdeardiary.wordpress.com/feed/atom", "Soumyajit De Rahul")
-        feedControl.addFeed("http://foulwall.com/atom.xml", "Zhengyang Liu")
-        feedControl.addFeed("http://kevinhughes.ca/feed/atom", "Kevin Hughes")
-        feedControl.addFeed("http://romanvotyakov.ru/atom.xml", "Roman Votyakov")
-        feedControl.addFeed("http://sergey.lisitsyn.me/atom.xml", "Sergey Lisitsyn")
-
-        // Draw it.
-        feedControl.draw(document.getElementById("google_feeds"));
+      function initialize() {
+        var feed = new google.feeds.Feed("http://404b0012.ngrok.com/feed");
+        feed.includeHistoricalEntries();
+        feed.setNumEntries(10);
+        feed.load(function(result) {
+          if (!result.error) {
+            var container = document.getElementById("feed");
+            for (var i = 0; i < result.feed.entries.length; i++) {
+              var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              div.appendChild(document.createTextNode(entry.title));
+              container.appendChild(div);
+            }
+          }
+        });
       }
-
-      google.setOnLoadCallback(OnLoad);
+      google.setOnLoadCallback(initialize);
     </script>
 
-    <div id="google_feeds"></div>
+    <div id="feed"></div>
 
   {% endblock %}
