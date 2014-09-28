@@ -6,30 +6,32 @@ import json
 import base64
 import calendar
 
-import pdb
-
 # initialization
 app = Flask(__name__)
-app.config.update(
-    DEBUG = True,
-)
+
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
 NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
-#DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
-DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/static/demos"
-#SHOGUN_PLANET='/home/sonne/shogun/planet-index.html'
-SHOGUN_PLANET = os.path.dirname(os.path.realpath(__file__)) + '/static/planet-index.html'
-#SHOGUN_IRCLOGS = "/home/sonne/shogun/"
-SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
+DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
+SHOGUN_IRCLOGS = "/home/sonne/shogun/"
+
+
+# if dev environment
+if(os.environ['DEV']):
+  import pdb
+  app.config.update(DEBUG = True)
+  DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/static/demos"
+  SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
+
 
 # Twitter API
 # from - https://apps.twitter.com/app/6246983/keys
-TWITTER_KEY = os.environ['TWITTER_KEY'] #HnjNvj7jfNxe7cUoAcN71PqI0
-TWITTER_SECRET = os.environ['TWITTER_SECRET'] #"4kQNDC5d75oEGocAExSY81iMag4ih2gATA1HXwIbNRLrgScfDK"
+TWITTER_KEY = os.environ['TWITTER_KEY']
+TWITTER_SECRET = os.environ['TWITTER_SECRET']
 BEARERTOKENCREDS = TWITTER_KEY + ':' + TWITTER_SECRET
 B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
+
 
 # controllers
 @app.route('/')
@@ -66,13 +68,6 @@ def docs():
 
 @app.route('/blog')
 def planet():
-  html=file(SHOGUN_PLANET).read()
-  soup = BeautifulSoup(html)
-  articles=[]
-  for article in soup.body.findAll("div", { "class" : "daygroup" }):
-    polished='<dt><h1>' + article.h2.string + '</h1></dt>'
-    articles.append(polished + unicode(article.div.div).replace('class="content"',"").replace('{tex}','\[').replace('{/tex}','\]'))
-
   return render_template('planet.html', articles=articles)
 
 
@@ -110,6 +105,7 @@ def get_showcase():
 
   return showcase
 
+
 def get_notebooks():
   notebooks = []
   for file in os.listdir(NOTEBOOK_DIR):
@@ -119,6 +115,7 @@ def get_notebooks():
       notebooks.append([notebook_url, notebook_image])
 
   return notebooks
+
 
 def get_demos():
   paths = []
@@ -131,6 +128,7 @@ def get_demos():
     links.append(('http://demos.shogun-toolbox.org/%s' % path[0], '/static/demos/%s' % path[1]))
 
   return links
+
 
 def recent_commits():
   url = "https://api.github.com/repos/shogun-toolbox/shogun/commits"
@@ -147,6 +145,7 @@ def recent_commits():
     return commits
   except urllib2.HTTPError, e:
     print e
+
 
 def recent_tweets():
   url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
@@ -170,6 +169,7 @@ def recent_tweets():
   except urllib2.HTTPError, e:
     print e
 
+
 def auth_twitter():
   url = 'https://api.twitter.com/oauth2/token'
   header = {}
@@ -188,6 +188,7 @@ def auth_twitter():
     return data['access_token']
   except urllib2.HTTPError as e:
     print e
+
 
 def get_calendar_irc_logs(logfiles):
   logfiles_set=set(logfiles)
@@ -236,6 +237,7 @@ def get_calendar_irc_logs(logfiles):
     all_entries.append((year, year_entries[::-1]))
 
   return all_entries[::-1]
+
 
 # launch
 if __name__ == '__main__':
