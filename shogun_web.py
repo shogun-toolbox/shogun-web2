@@ -68,7 +68,7 @@ def docs():
 
 @app.route('/blog')
 def planet():
-  return render_template('planet.html', articles=articles)
+  return render_template('planet.html')
 
 
 @app.route('/irclogs')

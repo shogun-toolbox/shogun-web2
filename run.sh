@@ -1,4 +1,4 @@
-cat .env | while read line
+for line in $(cat .env)
 do
   export $line
 done
