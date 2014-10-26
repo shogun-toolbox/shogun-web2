@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect
 from BeautifulSoup import BeautifulSoup
+from github import Github
 import os
 import urllib2, urllib
 import json
@@ -90,6 +91,14 @@ def irclog(date):
   return render_template('irclogs.html', log=log)
 
 
+@app.route('/shogun_readme')
+def shogun_readme():
+  github = Github()
+  md_content = get_github_file('https://raw.githubusercontent.com/shogun-toolbox/shogun/develop/README.md')
+  html_content = github.render_markdown(md_content)
+  return render_template('external_page.html', title="Shogun Readme", body=html_content)
+
+
 # utils
 def get_showcase():
   showcase = []
@@ -146,6 +155,16 @@ def recent_commits():
   except urllib2.HTTPError, e:
     print e
 
+
+# make sure to use the 'raw' file url
+def get_github_file(url):
+  request = urllib2.Request(url)
+
+  try:
+    response = urllib2.urlopen(request)
+    return response.read().decode('utf-8')
+  except urllib2.HTTPError, e:
+    print e
 
 def recent_tweets():
   url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
