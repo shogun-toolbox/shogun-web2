@@ -29,15 +29,12 @@ Details
 
 Deploying
 ---------
-The site is currently deployed to [Heroku](https://www.heroku.com/) under Kevin Hughes' account (pickle27 on Github) until we move it to the Shogun-toolbox.org server.
+The site is currently deployed to [Heroku](https://www.heroku.com/) under Kevin Hughes' account (kevinhughes27 on Github) until we move it to the Shogun-toolbox.org server.
 
-To deploy run
-```
-git push heroku master
-```
+To deploy run script/deploy.sh
 
-If you need to update credentials on Heroku run `creds2heroku.sh`
+If you need to update credentials on Heroku run `script/creds2heroku.sh`
 
 Developing
 ----------
-To run the app locally you can either run `./run.sh` or use the Heroku toolbelt manual and run `foreman start`. Both of these approaches will export the required environment variables before starting the main program. In order to run the app locally with full functionality you will need a copy of the credentials in the `.env` file. Message someone to get these credentials securely.
+To run the app locally you can either run `./script/server.sh` or use the Heroku toolbelt manual and run `foreman start`. Both of these approaches will export the required environment variables before starting the main program. In order to run the app locally with full functionality you will need a copy of the credentials in the `.env` file. Message someone to get these credentials securely.
