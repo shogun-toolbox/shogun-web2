@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect
+from flask.ext.assets import Environment, Bundle
+
 from BeautifulSoup import BeautifulSoup
 from github import Github
 import os
@@ -10,6 +12,16 @@ import calendar
 # initialization
 app = Flask(__name__)
 
+
+# assets
+assets = Environment(app)
+
+scss = Bundle('stylesheets/*.scss', filters='pyscss', output='gen/scss.css')
+all_css = Bundle('vendor/*.css', scss, filters='cssmin', output="gen/all.css")
+assets.register('css_all', all_css)
+
+js = Bundle('vendor/jquery.min.js', 'vendor/bootstrap.min.js', 'javascripts/*.js', filters='jsmin', output='gen/packed.js')
+assets.register('js_all', js)
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"

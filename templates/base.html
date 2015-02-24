@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <title>Shogun Machine Learning{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/overlay.css') }}">
 
-    <script src="{{ url_for( 'static', filename='js/jquery-1.11.1.min.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for( 'static', filename='js/overlay.js') }}" type="text/javascript"></script>
-    <script src="{{ url_for( 'static', filename='js/bootstrap.min.js') }}" type="text/javascript"></script>
+    {% assets "css_all" %}
+      <link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}">
+    {% endassets %}
+
+    {% assets "js_all" %}
+      <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
   </head>
 
   <body>
