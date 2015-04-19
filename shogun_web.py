@@ -16,7 +16,7 @@ app = Flask(__name__)
 # assets
 assets = Environment(app)
 
-scss = Bundle('stylesheets/*.scss', filters='pyscss', output='gen/scss.css')
+scss = Bundle('stylesheets/main.scss', filters='pyscss', output='gen/scss.css')
 all_css = Bundle('vendor/*.css', scss, filters='cssmin', output="gen/all.css")
 assets.register('css_all', all_css)
 
