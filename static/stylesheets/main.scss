@@ -1,15 +1,6 @@
-/*
- * Author: Carlos Alvarez
- * URL: http://alvarez.is
- *
- * Project Name: STANLEY - Free Bootstrap 3 Theme
- * Version: 1.0
- * URL: http://blacktie.co
- */
-
 @import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
-
 $montserrat: 'Montserrat', sans-serif;
+
 $color-true-red: #8F1D21;
 $color-lye-gray: #7F6B5D;
 $color-ink-gray:  #393432;
@@ -18,47 +9,96 @@ $color-white: #FFFFFF;
 
 @import "elements";
 @import "overlay";
-
-.navbar {
-  text-transform: uppercase;
-  margin-bottom: 0px;
-}
-
-.navbar-inverse {
-  padding-bottom: 70px;
-  padding-top: 70px;
-  background-color: $color-true-red;
-  border-color: $color-lye-gray;
-
-  .navbar-brand {
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 2px;
-    color: $color-black;
-  }
-
-  .navbar-nav > li > a {
-    font-weight: 700;
-    font-size: 14px;
-    color: $color-black;
-  }
-
-  .navbar-nav > li > a:hover {
-    font-weight: 700;
-    font-size: 14px;
-    color: $color-white;
-  }
-}
+@import "navbar";
 
 #hero {
   overflow: hidden;
-  background: $color-true-red;
+  background: $color-ink-gray;
   background-size: cover;
-  background-position: center 40%;
-  height: 300px;
+  background-position: center 50%;
+  height: 480px;
   position: relative;
-  padding-top: 100px;
+  top: -60px;
+  padding-top: 110px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+  @media (max-width: 991px) {
+    padding-top: 100px;
+  }
+
+  @media (max-width: 767px) {
+    height: 550px;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: -webkit-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.1) 26%, rgba(0, 0, 0, 0.35) 71%, rgba(0, 0, 0, 0.5) 100%);
+    background: -moz-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.1) 26%, rgba(0, 0, 0, 0.35) 71%, rgba(0, 0, 0, 0.5) 100%);
+      background: -o-linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.1) 26%, rgba(0, 0, 0, 0.35) 71%, rgba(0, 0, 0, 0.5) 100%);
+      background: linear-gradient(right, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.1) 26%, rgba(0, 0, 0, 0.35) 71%, rgba(0, 0, 0, 0.5) 100%);
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-ink-gray;
+  }
+
+  .container {
+    position: relative;
+    z-index: 33;
+  }
+
+  h1.hero-text {
+    font-family: $montserrat;
+    line-height: 52px;
+    padding-top: 30px;
+    text-align: center;
+    font-size: 37px;
+    font-weight: 300;
+    letter-spacing: .3px;
+    color: #FFF;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+
+    -webkit-animation-duration: 1s;
+
+    @media (max-width: 767px) {
+      font-size: 25px;
+      line-height: 38px;
+      margin-top: 0;
+      text-align: center;
+    }
+  }
+
+  .cta {
+    @include animationDelay(0.6s);
+    margin-top: 25px;
+    text-align: center;
+
+    @media (max-width: 767px) {
+      text-align: center;
+    }
+
+    a {
+      margin-right: 20px;
+      padding: 15px 31px;
+
+      @media (max-width: 767px) {
+        font-size: 14px;
+        padding: 12px 25px;
+        margin: 0px 15px 15px 0px;
+      }
+    }
+  }
 }
 
 #footer {

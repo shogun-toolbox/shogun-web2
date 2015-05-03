@@ -3,60 +3,18 @@
 {% block title %} - Home {% endblock %}
 
 {% block content %}
-  <div class="container pt">
 
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 centered">
-        <h1>A Large Scale Machine Learning Toolbox</h1>
-        <p align="justify">
-          SHOGUN is designed for unified large-scale learning for a broad range of feature
-          types and learning settings, like classification, regression, or explorative data analysis.
-        </p>
-      </div>
-    </div>
+  {% include "partials/navbar.html" %}
+  {% include "partials/hero.html" %}
 
+  <div class="container">
     <div class="row mt">
-      <div class="col-lg-6">
-        <div class="row">
-          <h3>Example Reel</h3>
-        </div>
-        <div class="row">
-          <div id="Showcase" class="carousel slide">
 
-            <ol class="carousel-indicators">
-              <li data-target="#Showcase" data-slide-to="0" class="active"></li>
-              {% for notebook in showcase %}
-                {% if loop.index > 1 %}
-                  <li data-target="#Showcase" data-slide-to="{{loop.index}}"></li>
-                {% endif %}
-              {% endfor %}
-             </ol>
-
-            <div class="carousel-inner">
-              {% for notebook in showcase %}
-                <div class="{{ 'active item' if loop.index == 1 else 'item' }}">
-                  <a class="overlay" href="{{notebook.0|safe}}">
-                    <img src="{{notebook.1|safe}}" alt="" style="width:460px; height:400px"/>
-                  </a>
-                  <div class="carousel-caption">
-                    <h4>Abstract</h4>
-                    <p>{{ notebook.2|safe }}</p>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-
-            <!-- Carousel nav -->
-            <a class="carousel-control left" href="#Showcase" data-slide="prev">&lsaquo;</a>
-            <a class="carousel-control right" href="#Showcase" data-slide="next">&rsaquo;</a>
-          </div>
-         </div>
+      <div class="col-md-6">
+        {% include "partials/example_reel.html" %}
       </div>
 
-      <div class="col-lg-2">
-      </div>
-
-      <div class="col-lg-4">
+      <div class="col-md-4 col-md-offset-2">
         <div class="row">
           <h2>Latest Release</h2>
           <strong>Shogun 3.2.0</strong><br>
@@ -93,9 +51,9 @@
 
   <div class="container pt">
     <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 centered">
+      <div class="col-md-8 col-md-offset-2 centered">
         <p align="justify">
-          <img src="{{ url_for( 'static', filename='images/shogun_logo.png') }}" border="0" align="left"/> Shogun's focus is on large scale kernel methods and especially on Support Vector Machines (SVM). It provides a generic SVM object interfacing to several different SVM implementations, among them the state of the art <a href="http://cmp.felk.cvut.cz/~xfrancv/ocas/html/index.html" target="_blank">OCAS</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/" target="_blank">Liblinear</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/" target="_blank">LibSVM</a>, <a href="http://svmlight.joachims.org/" target="_blank">SVMLight</a>, <a href="http://vikas.sindhwani.org/svmlin.html" target="_blank">SVMLin</a> and <a href="http://dm.unife.it/gpdt/" target="_blank">GPDT</a>.
+          Shogun's focus is on large scale kernel methods and especially on Support Vector Machines (SVM). It provides a generic SVM object interfacing to several different SVM implementations, among them the state of the art <a href="http://cmp.felk.cvut.cz/~xfrancv/ocas/html/index.html" target="_blank">OCAS</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/" target="_blank">Liblinear</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/" target="_blank">LibSVM</a>, <a href="http://svmlight.joachims.org/" target="_blank">SVMLight</a>, <a href="http://vikas.sindhwani.org/svmlin.html" target="_blank">SVMLin</a> and <a href="http://dm.unife.it/gpdt/" target="_blank">GPDT</a>.
         </p>
         <p align="justify">
           Each of the SVMs can be combined with a variety of kernels. The toolbox not only provides efficient implementations of the most common kernels, like the Linear, Polynomial, Gaussian and Sigmoid Kernel but also comes with a number of recent string kernels as e.g. the Locality Improved, Fischer, TOP, Spectrum, Weighted Degree Kernel (with shifts). For the latter the efficient LINADD optimizations are implemented. For linear  SVMs the COFFIN framework allows for on-demand computing feature spaces on-the-fly, even allowing to mix sparse, dense and other data types.
@@ -117,7 +75,7 @@
 
   <div class="container pt">
     <div class="row mt">
-      <div class="col-lg-4">
+      <div class="col-md-4">
         <h2>Shogun Workshop</h2>
         <p align="justify">
           <strong>Upcoming Workshop</strong>
@@ -127,7 +85,7 @@ More info coming soon, stay tuned!
         </p>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-md-4">
         <h2>GSOC 2014</h2>
         <p align="justify">
           <strong>We have applied as a mentoring org.<br></strong>
@@ -137,7 +95,7 @@ More info coming soon, stay tuned!
         </p>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-md-4">
         <h2>EUROPYTHON 2014</h2>
         <p align="justify">
           <strong>SHOGUN talk in Berlin.<br></strong>
@@ -172,7 +130,7 @@ More info coming soon, stay tuned!
 
               <div class="row-fluid">
                 {% for notebook in set %}
-                  <div class="col-lg-3">
+                  <div class="col-md-3">
                     <a class="overlay" href="{{notebook.0|safe}}">
                       <img src="{{notebook.1|safe}}" alt="" style="width:260px; height:200px"/>
                     </a>

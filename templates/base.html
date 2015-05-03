@@ -13,19 +13,15 @@
   </head>
 
   <body>
+    {% include "partials/overlay.html" %}
 
-    {% include "navbar.html" %}
-
-    {% include "overlay.html" %}
-
-    <div class="container page">
+    <div class="page">
       <div class="content">
         {% block content %}
         {% endblock %}
       </div>
     </div>
 
-    {% include "footer.html" %}
-
+    {% include "partials/footer.html" %}
   </body>
 </html>
