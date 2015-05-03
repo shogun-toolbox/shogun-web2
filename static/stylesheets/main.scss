@@ -2,6 +2,7 @@
 $montserrat: 'Montserrat', sans-serif;
 
 $color-true-red: #8F1D21;
+$color-red: #BD0000;
 $color-lye-gray: #7F6B5D;
 $color-ink-gray:  #393432;
 $color-black: #171412;
@@ -103,26 +104,58 @@ $color-white: #FFFFFF;
 
 #footer {
   background-color: $color-ink-gray;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  padding-top: 40px;
+  padding-bottom: 20px;
+
+  .container-fluid {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
 
   p {
     color: white;
   }
 
+  .citation {
+    line-height: 15px;
+    font-size: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-top: -15px;
+  }
+
+  a {
+    color: $color-red;
+
+    -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+    -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+    transition: color 0.1s ease-in, background 0.1s ease-in;
+
+    &:hover, :focus {
+      color: $color-lye-gray;
+      text-decoration: none;
+      outline: 0;
+    }
+
+    &:before, &:after {
+      -webkit-transition: color 0.1s ease-in, background 0.1s ease-in;
+      -moz-transition: color 0.1s ease-in, background 0.1s ease-in;
+      -ms-transition: color 0.1s ease-in, background 0.1s ease-in;
+      -o-transition: color 0.1s ease-in, background 0.1s ease-in;
+      transition: color 0.1s ease-in, background 0.1s ease-in;
+    }
+  }
+
   h4 {
     color: white;
     text-transform: uppercase;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
   }
 }
 
 /* Helpers */
-
-.mt {
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
 
 .pt {
   padding-top: 50px;

@@ -1,34 +1,42 @@
-<div class="row">
-  <h3>Example Reel</h3>
-</div>
-<div class="row">
-  <div id="Showcase" class="carousel slide">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Example Reel</h3>
+  </div>
 
-    <ol class="carousel-indicators">
-      <li data-target="#Showcase" data-slide-to="0" class="active"></li>
-      {% for notebook in showcase %}
-        {% if loop.index > 1 %}
-          <li data-target="#Showcase" data-slide-to="{{loop.index}}"></li>
-        {% endif %}
-      {% endfor %}
-     </ol>
+  <div class="panel-body">
+    <div id="Showcase" class="carousel slide">
 
-    <div class="carousel-inner">
-      {% for notebook in showcase %}
-        <div class="{{ 'active item' if loop.index == 1 else 'item' }}">
-          <a class="overlay" href="{{notebook.0|safe}}">
-            <img src="{{notebook.1|safe}}" alt="" style="width:460px; height:400px"/>
-          </a>
-          <div class="carousel-caption">
-            <h4>Abstract</h4>
-            <p>{{ notebook.2|safe }}</p>
+      <ol class="carousel-indicators">
+        <li data-target="#Showcase" data-slide-to="0" class="active"></li>
+        {% for notebook in showcase %}
+          {% if loop.index > 1 %}
+            <li data-target="#Showcase" data-slide-to="{{loop.index}}"></li>
+          {% endif %}
+        {% endfor %}
+       </ol>
+
+      <div class="carousel-inner">
+        {% for notebook in showcase %}
+          <div class="{{ 'active item' if loop.index == 1 else 'item' }}">
+            <div class="row">
+              <a class="overlay" href="{{notebook.0|safe}}">
+                <img src="{{notebook.1|safe}}" style="width:640px; height:480px;"/>
+              </a>
+            </div>
+
+            <div class="row">
+              <div class="carousel-caption">
+                <h4>Abstract</h4>
+                <p>{{ notebook.2|safe }}</p>
+              </div>
+            </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
+      </div>
 
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#Showcase" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#Showcase" data-slide="next">&rsaquo;</a>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#Showcase" data-slide="prev"></a>
+      <a class="carousel-control right" href="#Showcase" data-slide="next"></a>
+    </div>
   </div>
 </div>

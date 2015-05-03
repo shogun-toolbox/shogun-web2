@@ -166,7 +166,7 @@ def recent_commits():
     return commits
   except urllib2.HTTPError, e:
     print e
-
+    return []
 
 # make sure to use the 'raw' file url
 def get_github_file(url):
@@ -199,7 +199,7 @@ def recent_tweets():
     return tweets
   except urllib2.HTTPError, e:
     print e
-
+    return []
 
 def auth_twitter():
   url = 'https://api.twitter.com/oauth2/token'

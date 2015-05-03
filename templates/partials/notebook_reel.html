@@ -1,0 +1,31 @@
+<div id="BottomCarousel" class="carousel slide">
+
+  <ol class="carousel-indicators">
+    <li data-target="#BottomCarousel" data-slide-to="0" class="active"></li>
+    {% for set in bottom_carousel %}
+      {% if loop.index > 1 %}
+        <li data-target="#BottomCarousel" data-slide-to="{{ loop.index }}"></li>
+      {% endif %}
+    {% endfor %}
+   </ol>
+
+  <div class="carousel-inner">
+    {% for set in bottom_carousel %}
+      <div class="item {{ 'active' if loop.index == 1 else '' }}">
+        <div class="row">
+          {% for notebook in set %}
+            <div class="col-md-3">
+              <a class="overlay" href="{{ notebook.0|safe }}">
+                <img src="{{ notebook.1|safe }}" alt="" style="width:260px; height:200px"/>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#BottomCarousel" data-slide="prev"></a>
+  <a class="carousel-control right" href="#BottomCarousel" data-slide="next"></a>
+</div>

@@ -8,42 +8,26 @@
   {% include "partials/hero.html" %}
 
   <div class="container">
-    <div class="row mt">
+    <div class="row">
 
-      <div class="col-md-6">
+      <div class="col-md-7">
         {% include "partials/example_reel.html" %}
       </div>
 
-      <div class="col-md-4 col-md-offset-2">
+      <div class="col-md-4 col-md-offset-1">
         <div class="row">
-          <h2>Latest Release</h2>
-          <strong>Shogun 3.2.0</strong><br>
-          <em>"In $DEITY we trust all others bring data"<em><br><br>
-          <strong>Change Log</strong>
-          <ul>
-            <li>Fully support python3 now</li>
-            <li>Add mini-batch k-means [Parijat Mazumdar]</li>
-            <li>Add k-means++ [Parijat Mazumdar]</li>
-            <li>Add sub-sequence string kernel [lambday]</li>
-          </ul>
+          {% include "partials/release.html" %}
         </div>
+
         <div class="row">
-          <h2>Latest Commits</h2>
-          <ul>
-            {% for commit in commits %}
-              <li>{{ commit }}</li>
-            {% endfor %}
-          </ul>
+          {% include "partials/commits.html" %}
         </div>
+
         <div class="row">
-          <h2>Latest News</h2>
-          <ul>
-            {% for tweet in tweets %}
-              <li>{{ tweet }}</li>
-            {% endfor %}
-          </ul>
+          {% include "partials/news.html" %}
         </div>
       </div>
+
     </div>
   </div>
 
@@ -74,7 +58,7 @@
   <hr>
 
   <div class="container pt">
-    <div class="row mt">
+    <div class="row">
       <div class="col-md-4">
         <h2>Shogun Workshop</h2>
         <p align="justify">
@@ -108,44 +92,7 @@ More info coming soon, stay tuned!
   <hr>
 
   <div class="container pt">
-    <div class="row">
-      <div id="BottomCarousel" class="carousel slide">
-
-          <ol class="carousel-indicators">
-            <li data-target="#BottomCarousel" data-slide-to="0" class="active"></li>
-            {% for set in bottom_carousel %}
-              {% if loop.index > 1 %}
-                <li data-target="#BottomCarousel" data-slide-to="{{loop.index}}"></li>
-              {% endif %}
-            {% endfor %}
-           </ol>
-
-          <div class="carousel-inner">
-            {% for set in bottom_carousel %}
-              {% if loop.index == 1 %}
-                <div class="active item">
-              {% else %}
-                <div class="item">
-              {% endif %}
-
-              <div class="row-fluid">
-                {% for notebook in set %}
-                  <div class="col-md-3">
-                    <a class="overlay" href="{{notebook.0|safe}}">
-                      <img src="{{notebook.1|safe}}" alt="" style="width:260px; height:200px"/>
-                    </a>
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-
-          <!-- Carousel nav -->
-          <a class="carousel-control left" href="#BottomCarousel" data-slide="prev">&lsaquo;</a>
-          <a class="carousel-control right" href="#BottomCarousel" data-slide="next">&rsaquo;</a>
-      </div>
-    </div>
+    {% include "partials/notebook_reel.html" %}
   </div>
 
   <script type='text/javascript'>

@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>Latest Commits</h3>
+  </div>
+
+  <div class="panel-body">
+    <ul class="list-group">
+      {% for commit in commits %}
+        <li class="list-group-item">{{ commit }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

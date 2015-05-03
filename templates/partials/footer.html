@@ -1,9 +1,8 @@
 <div id="footer">
-  <a name="Contact">
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
-      <div class="col-lg-4">
+      <div class="col-md-2">
         <h4>Contact Us</h4>
         <p>
           <a href="http://sonnenburgs.de/soeren" target="_blank">Soeren Sonnenburg</a><br/>
@@ -13,7 +12,7 @@
         </p>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-md-2">
         <h4>Mailing List</h4>
         <p>
           <a href="mailto:shogun-list-subscribe@shogun-toolbox.org" target="_blank">Subscribe</a><br/>
@@ -23,34 +22,34 @@
         </p>
       </div>
 
-      <div class="col-lg-4" style="position-relative">
+      <div class="col-md-3">
         <h4>IRC</h4>
         <p>
           Chat with us on IRC - <strong>#shogun</strong> on freenode. You can also connect with <a href="http://webchat.freenode.net/?channels=shogun&amp;uio=d4" target="_blank">webchat#shogun</a> directly in your browser. All chats are logged <a href="/irclogs">here</a> for your convience.
         </p>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-6">
+
+      <div class="col-md-5">
         <h4>Cite Us</h4>
-        <p align="justify">
+        <p>
           If you use SHOGUN in your research you are kindly asked to cite the following paper:
-          <p>
-            <small><a href="http://dl.acm.org/citation.cfm?id=1859911" target="_blank">Soeren Sonnenburg, Gunnar Raetsch, Sebastian Henschel, Christian Widmer, Jonas Behr, Alexander Zien, Fabio de Bona, Alexander Binder, Christian Gehl, and Vojtech Franc. The SHOGUN Machine Learning Toolbox. Journal of Machine Learning Research, 11:1799-1802, June 2010.</a></small>
+          <p class="citation">
+            <a href="http://dl.acm.org/citation.cfm?id=1859911" target="_blank">Soeren Sonnenburg, Gunnar Raetsch, Sebastian Henschel, Christian Widmer, Jonas Behr, Alexander Zien, Fabio de Bona, Alexander Binder, Christian Gehl, and Vojtech Franc. The SHOGUN Machine Learning Toolbox. Journal of Machine Learning Research, 11:1799-1802, June 2010.</a>
           </p>
         </p>
       </div>
+    </div>
 
-      <div class="col-lg-6">
-        <h4>License</h4>
-        <img src="{{ url_for('static', filename='images/gplv3.png') }}" border="0" alt="GPLv3 Logo" align="left" style="padding: 6px 8px 8px 8px;"/>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <a href="http://www.gnu.org/copyleft/gpl.html" target="_blank">
+          <img src="{{ url_for('static', filename='images/gplv3.png') }}" border="0" alt="GPLv3 Logo" align="left" style="padding: 6px 8px 8px 8px;"/>
+        </a>
         <p align="justify">
-          SHOGUN is licensed under the GPL version 3 (cf. LICENSE).
-        </p>
-        <p align="justify">
-          Except for <a href="http://svmlight.joachims.org" target="_blank"></a>SVMLight which is (C) Torsten Joachims and follows a different licensing scheme (cf. LICENSE.SVMLight in the tar achive)
+          SHOGUN is licensed under the GPL version 3 (cf. LICENSE). Except for <a href="http://svmlight.joachims.org" target="_blank"></a>SVMLight which is (C) Torsten Joachims and follows a different licensing scheme (cf. LICENSE.SVMLight in the tar achive)
         </p>
       </div>
     </div>
+
   </div>
 </div>
