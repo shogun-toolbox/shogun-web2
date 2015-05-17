@@ -1,13 +1,17 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3>Latest News</h3>
+<div class="row">
+  <div class="col-md-1">
+    <i class="fa fa-twitter fa-3x" style="line-height: inherit"></i>
   </div>
 
-  <div class="panel-body">
-    <ul class="list-group">
-      {% for tweet in tweets %}
-        <li class="list-group-item">{{ tweet }}</li>
-      {% endfor %}
-    </ul>
+  <div class="col-md-8 col-md-offset-1">
+    <h3>Latest News</h3>
   </div>
 </div>
+
+<hr>
+
+<ul class="list-group">
+  {% for tweet in tweets %}
+    <li class="list-group-item">{{ tweet }}</li>
+  {% endfor %}
+</ul>

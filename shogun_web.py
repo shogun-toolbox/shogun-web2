@@ -49,8 +49,6 @@ B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
 # controllers
 @app.route('/')
 def index():
-  showcase = get_showcase()
-
   notebooks = get_notebooks()
   demos = get_demos()
   all_entries = notebooks + demos
@@ -66,7 +64,7 @@ def index():
   # recent commits from github
   commits = recent_commits()
 
-  return render_template('home.html', showcase=showcase, bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
+  return render_template('home.html', bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
 
 
 @app.route('/about')
@@ -112,21 +110,6 @@ def shogun_readme():
 
 
 # utils
-def get_showcase():
-  showcase = []
-  for file in os.listdir(SHOWCASE_DIR):
-    if file.endswith(".desc"):
-      showcase_url = "/static/showcase/" + file[:-5] + ".html"
-      if not os.path.isfile(SHOWCASE_DIR + "/" + file[:-5] + ".html"):
-        showcase_url = "http://demos.shogun-toolbox.org/" + (file[:-5]).replace('_', '/')
-      showcase_abstract = open(SHOWCASE_DIR + "/" + file).read()
-      showcase_image = "/static/showcase/" + file[:-5] + ".png"
-
-      showcase.append([showcase_url, showcase_image, showcase_abstract])
-
-  return showcase
-
-
 def get_notebooks():
   notebooks = []
   for file in os.listdir(NOTEBOOK_DIR):
@@ -168,6 +151,7 @@ def recent_commits():
     print e
     return []
 
+
 # make sure to use the 'raw' file url
 def get_github_file(url):
   request = urllib2.Request(url)
@@ -178,9 +162,10 @@ def get_github_file(url):
   except urllib2.HTTPError, e:
     print e
 
+
 def recent_tweets():
   url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-  params = {"screen_name": "ShogunToolbox", "exclude_replies": True, "count": 5}
+  params = {"screen_name": "ShogunToolbox", "exclude_replies": True, "count": 3}
   full_url = "%s?%s" % (url, urllib.urlencode(params))
 
   request = urllib2.Request(full_url)
@@ -200,6 +185,7 @@ def recent_tweets():
   except urllib2.HTTPError, e:
     print e
     return []
+
 
 def auth_twitter():
   url = 'https://api.twitter.com/oauth2/token'

@@ -10,22 +10,16 @@
   <div class="container">
     <div class="row">
 
-      <div class="col-md-7">
-        {% include "partials/example_reel.html" %}
+      <div class="col-md-4">
+        {% include "partials/release.html" %}
       </div>
 
-      <div class="col-md-4 col-md-offset-1">
-        <div class="row">
-          {% include "partials/release.html" %}
-        </div>
+      <div class="col-md-4">
+        {% include "partials/commits.html" %}
+      </div>
 
-        <div class="row">
-          {% include "partials/commits.html" %}
-        </div>
-
-        <div class="row">
-          {% include "partials/news.html" %}
-        </div>
+      <div class="col-md-4">
+        {% include "partials/news.html" %}
       </div>
 
     </div>
@@ -36,21 +30,7 @@
   <div class="container pt">
     <div class="row">
       <div class="col-md-8 col-md-offset-2 centered">
-        <p align="justify">
-          Shogun's focus is on large scale kernel methods and especially on Support Vector Machines (SVM). It provides a generic SVM object interfacing to several different SVM implementations, among them the state of the art <a href="http://cmp.felk.cvut.cz/~xfrancv/ocas/html/index.html" target="_blank">OCAS</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/liblinear/" target="_blank">Liblinear</a>, <a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/" target="_blank">LibSVM</a>, <a href="http://svmlight.joachims.org/" target="_blank">SVMLight</a>, <a href="http://vikas.sindhwani.org/svmlin.html" target="_blank">SVMLin</a> and <a href="http://dm.unife.it/gpdt/" target="_blank">GPDT</a>.
-        </p>
-        <p align="justify">
-          Each of the SVMs can be combined with a variety of kernels. The toolbox not only provides efficient implementations of the most common kernels, like the Linear, Polynomial, Gaussian and Sigmoid Kernel but also comes with a number of recent string kernels as e.g. the Locality Improved, Fischer, TOP, Spectrum, Weighted Degree Kernel (with shifts). For the latter the efficient LINADD optimizations are implemented. For linear  SVMs the COFFIN framework allows for on-demand computing feature spaces on-the-fly, even allowing to mix sparse, dense and other data types.
-        </p>
-        <p align="justify">
-          Furthermore, SHOGUN offers the freedom of working with custom pre-computed kernels.  One of its key features is the <em>combined kernel</em> which can be constructed by a weighted linear combination of a number of sub-kernels, each of which not necessarily working on the same domain. An optimal sub-kernel weighting can be learned using <a href="http://www.fml.tuebingen.mpg.de/raetsch/projects/lsmkl" target="_blank">Multiple Kernel Learning</a>. Currently SVM one-class, 2-class and multiclass classification and regression problems can be dealt with.
-        </p>
-        <p align="justify">
-          SHOGUN also implements a number of linear methods like Linear Discriminant Analysis (LDA), Linear Programming Machine (LPM), (Kernel) Perceptrons and features algorithms to train hidden markov models. The input feature-objects can be dense, sparse or strings and of type int/short/double/char and can be converted into  different feature types. Chains of <em>preprocessors</em> (e.g. substracting the mean) can be attached to each feature object allowing for on-the-fly pre-processing.
-        </p>
-        <p align="justify">
-          SHOGUN is implemented in C++ with interfaces to Matlab(tm), R, Octave and Python and is proudly released as <a href="http://mloss.org" target="_blank">Machine Learning Open Source Software</a>.
-        </p>
+        {% include "partials/description.html" %}
       </div>
     </div>
   </div>

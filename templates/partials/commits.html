@@ -1,13 +1,17 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3>Latest Commits</h3>
+<div class="row">
+  <div class="col-md-1">
+    <i class="fa fa-github fa-3x" style="line-height: inherit"></i>
   </div>
 
-  <div class="panel-body">
-    <ul class="list-group">
-      {% for commit in commits %}
-        <li class="list-group-item">{{ commit }}</li>
-      {% endfor %}
-    </ul>
+  <div class="col-md-8 col-md-offset-1">
+    <h3>Latest Commits</h3>
   </div>
 </div>
+
+<hr>
+
+<ul class="list-group">
+  {% for commit in commits %}
+    <li class="list-group-item">{{ commit }}</li>
+  {% endfor %}
+</ul>
