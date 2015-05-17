@@ -52,7 +52,7 @@ def index():
   # recent commits from github
   commits = recent_commits()
 
-  return render_template('home.html', bottom_carousel=bottom_carousel, tweets=tweets, commits=commits)
+  return render_template('home.html', bottom_carousel=bottom_carousel, commits=commits)
 
 
 @app.route('/about')
