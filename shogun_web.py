@@ -38,14 +38,6 @@ if(os.environ['DEV']):
   SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
 
 
-# Twitter API
-# from - https://apps.twitter.com/app/6246983/keys
-TWITTER_KEY = os.environ['TWITTER_KEY']
-TWITTER_SECRET = os.environ['TWITTER_SECRET']
-BEARERTOKENCREDS = TWITTER_KEY + ':' + TWITTER_SECRET
-B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
-
-
 @app.route('/')
 def index():
   notebooks = get_notebooks()
@@ -56,9 +48,6 @@ def index():
   bottom_carousel = []
   for i in xrange(0,len(all_entries),4):
     bottom_carousel.append(all_entries[i:(i+4)])
-
-  # recent tweets for news
-  tweets = recent_tweets()
 
   # recent commits from github
   commits = recent_commits()
@@ -159,46 +148,6 @@ def get_github_file(url):
     response = urllib2.urlopen(request)
     return response.read().decode('utf-8')
   except urllib2.HTTPError, e:
-    print e
-
-
-def recent_tweets():
-  url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-  params = {"screen_name": "ShogunToolbox", "exclude_replies": True, "count": 3}
-  full_url = "%s?%s" % (url, urllib.urlencode(params))
-
-  request = urllib2.Request(full_url)
-
-  access_token = auth_twitter()
-  request.add_header('Authorization', 'Bearer %s' % access_token)
-
-  try:
-    response = urllib2.urlopen(request)
-    raw_data = response.read().decode('utf-8')
-    tweets = json.loads(raw_data)
-    return tweets
-  except urllib2.HTTPError, e:
-    print e
-    return []
-
-
-def auth_twitter():
-  url = 'https://api.twitter.com/oauth2/token'
-  header = {}
-  values = {}
-  header['Authorization'] = 'Basic ' + B64BEARERTOKENCREDS
-  header['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-  values['grant_type'] = 'client_credentials'
-
-  data = urllib.urlencode(values)
-  req = urllib2.Request(url, data, header)
-
-  try:
-    response = urllib2.urlopen(req)
-    raw_data = response.read()
-    data = json.loads(raw_data)
-    return data['access_token']
-  except urllib2.HTTPError as e:
     print e
 
 

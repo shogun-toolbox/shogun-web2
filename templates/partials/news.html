@@ -10,11 +10,13 @@
 
 <hr>
 
-<ul class="list-group">
-  {% for tweet in tweets %}
-    <a href="https://twitter.com/ShogunToolbox/status/{{ tweet['id_str'] }}" target="_blank" class="list-group-item">{{ tweet['text'] }}</a>
-  {% endfor %}
-</ul>
+<a class="twitter-timeline" href="https://twitter.com/ShogunToolbox"
+  data-widget-id="599999681444192257"
+  data-chrome="noheader nofooter noborders transparent"
+  data-tweet-limit="3"
+  >
+  Tweets by @ShogunToolbox
+</a>
 
 <a href="https://twitter.com/shoguntoolbox" class="twitter-follow-button" data-show-count="false" data-size="large">Follow @shoguntoolbox</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
