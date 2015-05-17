@@ -12,6 +12,6 @@
 
 <ul class="list-group">
   {% for tweet in tweets %}
-    <li class="list-group-item">{{ tweet }}</li>
+    <a href="https://twitter.com/ShogunToolbox/status/{{ tweet['id_str'] }}" target="_blank" class="list-group-item">{{ tweet['text'] }}</a>
   {% endfor %}
 </ul>

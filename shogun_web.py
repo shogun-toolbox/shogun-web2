@@ -46,7 +46,6 @@ BEARERTOKENCREDS = TWITTER_KEY + ':' + TWITTER_SECRET
 B64BEARERTOKENCREDS = base64.b64encode(BEARERTOKENCREDS)
 
 
-# controllers
 @app.route('/')
 def index():
   notebooks = get_notebooks()
@@ -144,8 +143,8 @@ def recent_commits():
     data = json.loads(raw_data)
     commits = []
     for i in range(0,3):
-      message = data[i].get('commit').get('message')
-      commits.append(message)
+      commit = data[i].get('commit')
+      commits.append(commit)
     return commits
   except urllib2.HTTPError, e:
     print e
@@ -176,11 +175,7 @@ def recent_tweets():
   try:
     response = urllib2.urlopen(request)
     raw_data = response.read().decode('utf-8')
-    data = json.loads(raw_data)
-    tweets = []
-    for tweet in data:
-      # note to self I can get the hashtags and urls and their string indices to build a proper html string of the tweet
-      tweets.append(tweet['text'])
+    tweets = json.loads(raw_data)
     return tweets
   except urllib2.HTTPError, e:
     print e
