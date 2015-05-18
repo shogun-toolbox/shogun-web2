@@ -3,7 +3,12 @@
 {% block title %} - IRC Logs {% endblock %}
 
 {% block content %}
-  <div class="container pt">
+
+  <header class="navbar navbar-inverse normal" role="banner">
+    {% include "partials/navbar.html" %}
+  </header>
+
+  <div class="container mt">
     {% if logs %}
       <div class="col-lg-8 col-lg-offset-2">
         {% for year_name, year in logs %}
