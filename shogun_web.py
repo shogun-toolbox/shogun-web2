@@ -22,6 +22,7 @@ assets.register('css_all', all_css)
 
 js = Bundle(
   'vendor/jquery.min.js',
+  'vendor/jquery.timeago.js',
   'vendor/bootstrap.min.js',
   'javascripts/*.js',
   filters='jsmin', output='gen/packed.js'
@@ -54,10 +55,7 @@ def index():
   for i in xrange(0,len(all_entries),4):
     bottom_carousel.append(all_entries[i:(i+4)])
 
-  # recent commits from github
-  commits = recent_commits()
-
-  return render_template('home.html', bottom_carousel=bottom_carousel, commits=commits)
+  return render_template('home.html', bottom_carousel=bottom_carousel)
 
 
 @app.route('/about')
@@ -125,24 +123,6 @@ def get_demos():
     links.append(('http://demos.shogun-toolbox.org/%s' % path[0], '/static/demos/%s' % path[1]))
 
   return links
-
-
-def recent_commits():
-  url = "https://api.github.com/repos/shogun-toolbox/shogun/commits"
-  request = urllib2.Request(url)
-
-  try:
-    response = urllib2.urlopen(request)
-    raw_data = response.read().decode('utf-8')
-    data = json.loads(raw_data)
-    commits = []
-    for i in range(0,3):
-      commit = data[i].get('commit')
-      commits.append(commit)
-    return commits
-  except urllib2.HTTPError, e:
-    print e
-    return []
 
 
 # make sure to use the 'raw' file url

@@ -10,11 +10,15 @@
 
 <hr>
 
-<ul class="list-group">
-  {% for commit in commits %}
-    <a href="https://github.com/shogun-toolbox/shogun/commit/{{ commit.get('url')[-40:] }}" target="_blank" class="list-group-item">{{ commit.get('message') }}</a>
-  {% endfor %}
-</ul>
+<div id="latest-commits-widget">
+  <ul id="commit-history-widget"></ul>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    githubCommits();
+  });
+</script>
 
 <a class="github-button" href="https://github.com/shogun-toolbox/shogun" data-icon="octicon-star" data-style="mega" data-count-href="/shogun-toolbox/shogun/stargazers" data-count-api="/repos/shogun-toolbox/shogun#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star shogun-toolbox/shogun on GitHub">Star</a>
 
