@@ -20,7 +20,12 @@ scss = Bundle('stylesheets/main.scss', filters='pyscss', output='gen/scss.css')
 all_css = Bundle('vendor/*.css', scss, filters='cssmin', output="gen/all.css")
 assets.register('css_all', all_css)
 
-js = Bundle('vendor/jquery.min.js', 'vendor/bootstrap.min.js', 'javascripts/*.js', filters='jsmin', output='gen/packed.js')
+js = Bundle(
+  'vendor/jquery.min.js',
+  'vendor/bootstrap.min.js',
+  'javascripts/*.js',
+  filters='jsmin', output='gen/packed.js'
+)
 assets.register('js_all', js)
 
 # constants
@@ -66,8 +71,8 @@ def docs():
 
 
 @app.route('/blog')
-def planet():
-  return render_template('planet.html')
+def blog():
+  return render_template('blog.html')
 
 
 @app.route('/irclogs')
