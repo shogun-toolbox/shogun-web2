@@ -51,16 +51,20 @@ def index():
   all_entries = notebooks + demos
 
   # group notebooks and demos in sets of 4 for the bottom carousel
-  bottom_carousel = []
+  examples = []
   for i in xrange(0,len(all_entries),4):
-    bottom_carousel.append(all_entries[i:(i+4)])
+    examples.append(all_entries[i:(i+4)])
 
-  return render_template('home.html', bottom_carousel=bottom_carousel)
+  return render_template('home.html', examples=examples)
 
 
 @app.route('/gallery')
 def gallery():
-  return render_template('gallery.html')
+  notebooks = get_notebooks()
+  demos = get_demos()
+  examples = notebooks + demos
+
+  return render_template('gallery.html', examples=examples)
 
 
 @app.route('/docs')
@@ -107,22 +111,24 @@ def get_notebooks():
     if file.endswith(".html"):
       notebook_url = "/static/notebooks/"+file
       notebook_image = notebook_url[:-5]+'.png'
-      notebooks.append([notebook_url, notebook_image])
+      notebook_title = file[0:-5].replace('_', ' ')
+
+      notebooks.append([notebook_url, notebook_image, notebook_title])
 
   return notebooks
 
 
 def get_demos():
-  paths = []
+  demos = []
   for base, dirs, files in os.walk(DEMO_DIR, topdown=True):
     for name in [ os.path.join(DEMO_DIR, base, f) for f in files if f.endswith(".desc") ]:
-      paths.append(('/'.join(name.split('/')[-2:])[:-5]+'/', '_'.join(name.split('/')[-2:])[:-5] + '.png'))
+      demo_url = 'http://demos.shogun-toolbox.org/' + '/'.join(name.split('/')[-2:])[:-5]
+      demo_image = '/static/demos/' + '_'.join(name.split('/')[-2:])[:-5] + '.png'
+      demo_title = ' '.join(name.split('/')[-2:])[:-5].replace('_', ' ')
 
-  links=[]
-  for path in paths:
-    links.append(('http://demos.shogun-toolbox.org/%s' % path[0], '/static/demos/%s' % path[1]))
+      demos.append([demo_url, demo_image, demo_title])
 
-  return links
+  return demos
 
 
 # make sure to use the 'raw' file url

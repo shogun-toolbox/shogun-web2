@@ -8,4 +8,20 @@
   {% include "partials/navbar.html" %}
 </header>
 
+<div class="container pt">
+  <div class="row">
+    {% for example in examples %}
+      <div class="col-md-3 col-md-offset-1">
+        <a class="pic overlay" href="{{ example.0|safe }}">
+          <div class="layer">
+            <p>{{ example.2 }}</p>
+          </div>
+          <img src="{{ example.1|safe }}" alt="{{ example.2 }}" class="img-responsive" style="width:260px; height:200px"/>
+        </a>
+        <h1>&nbsp;</h1>
+      </div>
+    {% endfor %}
+  </div>
+</div>s
+
 {% endblock %}
