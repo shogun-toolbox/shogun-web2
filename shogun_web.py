@@ -58,9 +58,9 @@ def index():
   return render_template('home.html', bottom_carousel=bottom_carousel)
 
 
-@app.route('/about')
-def about():
-  return render_template('about.html')
+@app.route('/gallery')
+def gallery():
+  return render_template('gallery.html')
 
 
 @app.route('/docs')
@@ -68,9 +68,9 @@ def docs():
   return redirect('http://www.shogun-toolbox.org/doc/en/current/')
 
 
-@app.route('/blog')
-def blog():
-  return render_template('blog.html')
+@app.route('/about')
+def about():
+  return render_template('about.html')
 
 
 @app.route('/irclogs')
