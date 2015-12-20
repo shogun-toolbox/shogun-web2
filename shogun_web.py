@@ -37,7 +37,7 @@ SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 
 
 # if dev environment
-if(os.environ['DEV']):
+if(os.environ.get('DEV', None)):
   import pdb
   app.config.update(DEBUG = True)
   DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/static/demos"
