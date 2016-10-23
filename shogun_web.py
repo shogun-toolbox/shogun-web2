@@ -11,7 +11,7 @@ import calendar
 
 # initialization
 app = Flask(__name__)
-
+#app.config['DEBUG'] = True # enable for local bug hunting
 
 # assets
 assets = Environment(app)
@@ -66,16 +66,17 @@ def gallery():
 
   return render_template('gallery.html', examples=examples)
 
+@app.route('/examples')
+def examples():
+  return redirect('http://shogun.ml/cookbook/latest/')
 
 @app.route('/docs')
 def docs():
-  return redirect('http://www.shogun-toolbox.org/doc/en/current/')
-
-
-@app.route('/about')
-def about():
-  return render_template('about.html')
-
+  return redirect('https://github.com/shogun-toolbox/shogun/wiki')
+  
+@app.route('/install')
+def install():
+  return render_template('install.html')
 
 @app.route('/irclogs')
 def irclogs():

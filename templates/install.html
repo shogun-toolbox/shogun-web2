@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %} - Download {% endblock %}
+
+{% block content %}
+
+<header class="navbar navbar-inverse normal" role="banner">
+  {% include "partials/navbar.html" %}
+</header>
+
+<h1>Installing Shogun</h1><br>Note: This page should load all ressources from the relevant places and put them underneath each other rather thank linking. We also can consider putting this into the cookbook (readthedocs)
+
+<p>
+<h2>Packages</h2><br>You can directly install Shogun on the following systems.
+    <p>
+    <h3>Ubuntu ppa</h3>
+    Put two lines to add ppa
+    </p>
+    <p>
+    <h3>Windows?</h3>
+     Link to installer.exe
+    </p>
+    <p>
+    <h3>Fedora</h3>
+     what are the lines to install?
+    </p>
+</p>
+
+
+<p>
+<h2>Docker images</h2><br>You can run Shogun in <a href="cloud.shogun.ml" target=_blank>our own cloud</a> or set up your own.
+
+    <p>
+    <h3>Docker</h3>
+     Commands to launch Shogun in docker
+    </p>
+</p>
+
+<h2>Building from source-code</h2><br>There are various ways to build Shogun from source-code.
+    <p>
+    <h3>Python pypi</h3>
+    pip install shogun
+    </p>
+    <p>
+    <h3>Fedora</h3>
+     what are the lines to install?
+    </p>
+    <p>
+    <h3>Generic</h3>
+     QUICKSTART.md
+    </p>
+</p>
+
+
+{% endblock %}
