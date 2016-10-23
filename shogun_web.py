@@ -71,12 +71,6 @@ def gallery():
 def docs():
   return redirect('http://www.shogun-toolbox.org/doc/en/current/')
 
-
-@app.route('/about')
-def about():
-  return render_template('about.html')
-
-
 @app.route('/irclogs')
 def irclogs():
   logfiles = [ f.replace('#shogun.','').replace('.log.html','') for f in os.listdir(SHOGUN_IRCLOGS) if f.startswith('#shogun') ]
