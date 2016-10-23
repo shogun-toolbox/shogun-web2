@@ -66,6 +66,9 @@ def gallery():
 
   return render_template('gallery.html', examples=examples)
 
+@app.route('/examples')
+def examples():
+  return redirect('http://shogun.ml/cookbook/latest/')
 
 @app.route('/docs')
 def docs():
