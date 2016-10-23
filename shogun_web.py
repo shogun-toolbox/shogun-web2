@@ -11,7 +11,7 @@ import calendar
 
 # initialization
 app = Flask(__name__)
-
+#app.config['DEBUG'] = True # enable for local bug hunting
 
 # assets
 assets = Environment(app)
