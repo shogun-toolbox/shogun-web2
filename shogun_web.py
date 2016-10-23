@@ -69,7 +69,7 @@ def gallery():
 
 @app.route('/docs')
 def docs():
-  return redirect('http://www.shogun-toolbox.org/doc/en/current/')
+  return redirect('https://github.com/shogun-toolbox/shogun/wiki')
 
 @app.route('/irclogs')
 def irclogs():
