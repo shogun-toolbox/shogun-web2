@@ -73,6 +73,10 @@ def examples():
 @app.route('/docs')
 def docs():
   return redirect('https://github.com/shogun-toolbox/shogun/wiki')
+  
+@app.route('/install')
+def install():
+  return render_template('install.html')
 
 @app.route('/irclogs')
 def irclogs():
