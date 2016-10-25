@@ -37,6 +37,7 @@ DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
+DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
 
 
 # if dev environment
@@ -54,6 +55,10 @@ def docs_static(filename):
 @app.route('/cookbook/<path:filename>')
 def cookbook_static(filename):
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
+
+@app.route('/api/<path:filename>')
+def api_static(filename):
+    return send_from_directory(DOXYGEN_SUBMODULE_DIR, filename)
 
 @app.route('/')
 def index():
