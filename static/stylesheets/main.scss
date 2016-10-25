@@ -179,3 +179,9 @@ $color-white: #FFFFFF;
   font-size: 40px;
   color: $color-lye-gray;
 }
+
+/* Latest release / Development / News panels */
+.news-panel {
+  overflow: auto;
+  max-height: 500px;
+}
