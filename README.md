@@ -53,8 +53,11 @@ Create a `<div>` in the template file (e.g. `templates/install.html`) based on t
 
 ```
     <div class="md" data-type="md" data-url="/docs/README.md">
-      <div class="md-container"></div>
+      <div class="md-container" style="text-align: justify"></div>
     </div>
 ```
+
+This example also shows how to pass a paragraph style (here: text-align).
+
 
 For more detail see `static/javascripts/markdown.js`.
