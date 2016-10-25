@@ -63,13 +63,13 @@ def index():
   return render_template('home.html', examples=examples)
 
 
-@app.route('/gallery')
-def gallery():
+@app.route('/showroom')
+def showroom():
   notebooks = get_notebooks()
   demos = get_demos()
   examples = notebooks + demos
 
-  return render_template('gallery.html', examples=examples)
+  return render_template('showroom.html', examples=examples)
 
 @app.route('/examples')
 def examples():
