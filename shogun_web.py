@@ -36,6 +36,8 @@ NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
 DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
+COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
+
 
 # if dev environment
 if(os.environ.get('DEV', None)):
@@ -48,6 +50,10 @@ if(os.environ.get('DEV', None)):
 def docs_static(filename):
     print app.root_path
     return send_from_directory(DOCS_SUBMODULE_DIR, filename)
+
+@app.route('/cookbook/<path:filename>')
+def docs_static(filename):
+    return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
 
 @app.route('/')
 def index():
