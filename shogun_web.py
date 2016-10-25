@@ -84,7 +84,7 @@ def showroom():
 
 @app.route('/examples')
 def examples():
-  return redirect('http://shogun.ml/cookbook/latest/')
+  return redirect('http://beta.shogun.ml/cookbook/nightly/')
 
 @app.route('/docs')
 def docs():
