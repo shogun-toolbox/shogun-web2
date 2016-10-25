@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, send_from_directory
 from flask.ext.assets import Environment, Bundle
 
 from BeautifulSoup import BeautifulSoup
@@ -21,9 +21,10 @@ all_css = Bundle('vendor/*.css', scss, filters='cssmin', output="gen/all.css")
 assets.register('css_all', all_css)
 
 js = Bundle(
-  'vendor/jquery.min.js',
+  'vendor/jquery-3.1.1.min.js',
   'vendor/jquery.timeago.js',
   'vendor/bootstrap.min.js',
+  'vendor/showdown.min.js',
   'javascripts/*.js',
   filters='jsmin', output='gen/packed.js'
 )
@@ -34,7 +35,7 @@ SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
 NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
 DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/home/sonne/shogun/"
-
+DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 
 # if dev environment
 if(os.environ.get('DEV', None)):
@@ -43,6 +44,10 @@ if(os.environ.get('DEV', None)):
   DEMO_DIR= os.path.dirname(os.path.realpath(__file__)) + "/static/demos"
   SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
 
+@app.route('/docs/<path:filename>')
+def docs_static(filename):
+    print app.root_path
+    return send_from_directory(DOCS_SUBMODULE_DIR, filename)
 
 @app.route('/')
 def index():

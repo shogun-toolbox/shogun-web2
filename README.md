@@ -38,3 +38,23 @@ If you need to update credentials on Heroku run `script/creds2heroku.sh`
 Developing
 ----------
 To run the app locally you can either run `./script/server.sh` or use the Heroku toolbelt manual and run `foreman start`. Both of these approaches will export the required environment variables before starting the main program. In order to run the app locally with full functionality you will need a copy of the credentials in the `.env` file. Message someone to get these credentials securely.
+
+### Embedding markdown files
+
+To embed a markdown file from the `docs submodule` (see [shogun-toolbox/docs](https://github.com/shogun-toolbox/docs)).
+
+_Prerequisites:_
+
+  * `DOCS_SUBMODULE_DIR` const in `shogun_web.py` defines the relative path to app's root folder
+  * Fetch the docs submodule into the `docs` folder in the root
+
+
+Create a `<div>` in the template file (e.g. `templates/install.html`) based on the following template:
+
+```
+    <div class="md" data-type="md" data-url="/docs/README.md">
+      <div class="md-container"></div>
+    </div>
+```
+
+For more detail see `static/javascripts/markdown.js`.
