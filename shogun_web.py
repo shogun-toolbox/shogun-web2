@@ -112,15 +112,6 @@ def irclog(date):
   log = str(soup.body.table)
   return render_template('irclogs.html', log=log)
 
-
-@app.route('/shogun_readme')
-def shogun_readme():
-  github = Github()
-  md_content = get_github_file('https://raw.githubusercontent.com/shogun-toolbox/shogun/develop/README.md')
-  html_content = github.render_markdown(md_content)
-  return render_template('external_page.html', title="Shogun Readme", body=html_content)
-
-
 # utils
 def get_notebooks():
   notebooks = []
