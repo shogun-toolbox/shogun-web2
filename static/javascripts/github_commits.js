@@ -47,9 +47,9 @@ githubCommits = function() {
       per_page: limit
     },
     dataType: "jsonp",
-    type: "get"
-  }).success(function(response) {
-    return callback(response);
+    type: "get",
+    success: function(response) {
+      return callback(response);
+    }
   });
-
 };
