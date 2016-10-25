@@ -52,7 +52,7 @@ def docs_static(filename):
     return send_from_directory(DOCS_SUBMODULE_DIR, filename)
 
 @app.route('/cookbook/<path:filename>')
-def docs_static(filename):
+def cookbook_static(filename):
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
 
 @app.route('/')
