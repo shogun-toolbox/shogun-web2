@@ -33,6 +33,11 @@ Then, install as
 Install as
 <pre class="command subordinate">$ sudo dnf install shogun</pre>
     </p>
+    
+    <h3>Mac</h3>
+     Shogun is part of <a href="https://github.com/Homebrew/homebrew-science target="_blank"">homebrew-science</a>. Install the latest version as
+<pre class="command subordinate">$ sudo brew install shogun</pre>
+    </p>
 </p>
 
 
@@ -40,13 +45,16 @@ Install as
 <h2>Docker images</h2><br>You can run Shogun in <a href="cloud.shogun.ml" target=_blank>our own cloud</a> or set up your own using our <a href="https://hub.docker.com/r/shogun/shogun-dev/" target=_blank>Docker images</a> as:
      <pre class="command subordinate">$ sudo docker pull shogun/shogun
 $ sudo docker run -it shogun/shogun bash</pre>
+For mounting a local folder into the docker image, you could pass an additional option
+<pre class="command subordinate"> -v /your/local/folder:/same/folder/in/docker</pre>
 </p>
+
 
 <h2>Building from source-code</h2><br>There are various ways to build Shogun from source-code.
     <p>
     <h3>Python pypi</h3>
     You can install from <a href="(https://pypi.python.org/pypi/shogun-ml/)">pipy</a>. There is limited control over options and it might take a long time as everything is done from scratch.
-    <pre class="command subordinate">$ pip install shogun</pre>
+    <pre class="command subordinate">$ pip install shogun-ml</pre>
     </p>
 
 <div class="md" data-type="md" data-url="/docs/INSTALL.md">
