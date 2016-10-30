@@ -77,7 +77,7 @@ def showroom():
 
 @app.route('/examples')
 def examples():
-    return redirect('http://beta.shogun.ml/cookbook/nightly/')
+    return redirect('/cookbook/latest/index.html')
 
 
 @app.route('/docs')
@@ -113,7 +113,7 @@ def irclog(date):
 # utils
 def get_notebooks():
     notebooks = []
-    rel_path = "/static/notebooks/"
+    rel_path = "/static/notebook/latest/"
     for _file in os.listdir(NOTEBOOK_DIR):
         if _file.endswith(".html"):
             notebook_url = rel_path + _file
