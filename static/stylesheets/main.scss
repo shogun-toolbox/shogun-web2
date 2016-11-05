@@ -82,6 +82,25 @@ $color-white: #FFFFFF;
     }
   }
 
+  h5.hero-text {
+    font-family: $montserrat;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: .3px;
+    color: #e5e5e5;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    padding-left: 53px;
+
+    -webkit-animation-duration: 1s;
+
+    @media (max-width: 767px) {
+      font-size: 25px;
+      line-height: 38px;
+      margin-top: 0;
+      text-align: center;
+    }
+  }
+
   .cta {
     @include animationDelay(0.6s);
     margin-top: 25px;
