@@ -85,6 +85,9 @@ def showroom():
 def examples():
     return redirect('/cookbook/latest/index.html')
 
+@app.route('/api')
+def api():
+    return redirect('/api/latest/index.html')
 
 @app.route('/docs')
 def docs():
