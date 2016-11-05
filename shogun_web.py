@@ -66,7 +66,7 @@ def api_static(filename):
 
 
 @app.route('/notebook/<path:filename>')
-def api_static(filename):
+def notebook_static(filename):
     return send_from_directory(NOTEBOOK_SUBMODULE_DIR, filename)
 
 
