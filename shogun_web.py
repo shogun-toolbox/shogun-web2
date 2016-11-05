@@ -32,7 +32,7 @@ assets.register('js_all', js)
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
-NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
+NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
