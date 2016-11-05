@@ -32,12 +32,13 @@ assets.register('js_all', js)
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
-NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook"
+NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook/latest"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/home/sonne/shogun/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
 DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
+NOTEBOOK_SUBMODULE_DIR = app.root_path + "/static/notebook/"
 
 # if dev environment
 if (os.environ.get('DEV', None)):
@@ -62,6 +63,11 @@ def cookbook_static(filename):
 @app.route('/api/<path:filename>')
 def api_static(filename):
     return send_from_directory(DOXYGEN_SUBMODULE_DIR, filename)
+
+
+@app.route('/notebook/<path:filename>')
+def api_static(filename):
+    return send_from_directory(NOTEBOOK_SUBMODULE_DIR, filename)
 
 
 @app.route('/')
@@ -113,7 +119,7 @@ def irclog(date):
 # utils
 def get_notebooks():
     notebooks = []
-    rel_path = "/static/notebook/latest/"
+    rel_path = "/notebook/latest/"
     for _file in os.listdir(NOTEBOOK_DIR):
         if _file.endswith(".html"):
             notebook_url = rel_path + _file
