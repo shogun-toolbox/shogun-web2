@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, send_from_directory
 from flask.ext.assets import Environment, Bundle
+from flask_analytics import Analytics
 
 from BeautifulSoup import BeautifulSoup
 from github import Github
@@ -12,6 +13,10 @@ import calendar
 # initialization
 app = Flask(__name__)
 # app.config['DEBUG'] = True # enable for local bug hunting
+Analytics(app)
+app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
+app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = 'UA-4138452-1'
+
 
 # assets
 assets = Environment(app)

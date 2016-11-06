@@ -13,3 +13,4 @@ itsdangerous==0.24
 wsgiref==0.1.2
 PyGithub==1.25
 markdown==2.6.7
+Flask-Analytics==0.6.0
