@@ -34,7 +34,7 @@ assets.register('js_all', js)
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
 NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook/latest"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
-SHOGUN_IRCLOGS = "/home/sonne/shogun/"
+SHOGUN_IRCLOGS = "/var/www/shogun-toolbox.org/irclogs/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
 DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
