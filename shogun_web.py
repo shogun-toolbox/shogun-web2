@@ -108,6 +108,11 @@ def docs():
     return redirect('https://github.com/shogun-toolbox/shogun/wiki')
 
 
+@app.route('/doc/en/<path:filename>')
+def doc(filename):
+    return redirect('/api/{path}'.format(path=filename))
+
+
 @app.route('/install')
 def install():
     return render_template('install.html')
