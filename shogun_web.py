@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, send_from_directory
 from flask.ext.assets import Environment, Bundle
 from flask_analytics import Analytics
+from werkzeug.routing import BaseConverter
 
 from BeautifulSoup import BeautifulSoup
 from github import Github
@@ -12,11 +13,19 @@ import calendar
 
 # initialization
 app = Flask(__name__)
-# app.config['DEBUG'] = True # enable for local bug hunting
+app.config['DEBUG'] = True # enable for local bug hunting
 Analytics(app)
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = 'UA-4138452-1'
 
+
+# api docs regex converter
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
+
+app.url_map.converters['regex'] = RegexConverter
 
 # assets
 assets = Environment(app)
@@ -122,6 +131,17 @@ def irclog(date):
     soup = BeautifulSoup(html)
     log = str(soup.body.table)
     return render_template('irclogs.html', log=log)
+
+
+@app.route('/<regex("(SG|C).*"):class_name>/')
+def api_redirect(class_name):
+    if class_name.startswith('C'):
+        doxygen_prefix = "classshogun_1_1"
+    else:
+        doxygen_prefix = "singletonshogun_1_1"
+    return redirect('/api/latest/{prefix}{sg_class}.html'.format(
+        prefix=doxygen_prefix, sg_class=class_name)
+    )
 
 
 # utils
