@@ -107,7 +107,7 @@ def examples():
 
 @app.route('/api')
 def api():
-    return redirect('/api/latest/index.html')
+    return redirect('/api/latest/classes.html')
 
 @app.route('/docs')
 def docs():
