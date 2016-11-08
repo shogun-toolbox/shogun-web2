@@ -193,7 +193,7 @@ def get_abstract(fname):
 
         for cell in cells:
             if cell['cell_type'] == 'heading' or cell['cell_type'] == 'markdown':
-                return markdown.markdown(''.join(cell['source']).replace('#','')
+                return markdown.markdown(''.join(cell['source']).replace('#',''))
     except:
         pass
     return os.path.basename(fname)
