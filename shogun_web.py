@@ -192,7 +192,7 @@ def get_abstract(fname):
                 cells = js['cells']
 
         for cell in cells:
-            if cell['cell_type'] == 'heading':
+            if cell['cell_type'] == 'heading' or cell['cell_type'] == 'markdown':
                 return markdown.markdown(''.join(cell['source']))
     except:
         pass
