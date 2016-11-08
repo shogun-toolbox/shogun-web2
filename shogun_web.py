@@ -13,7 +13,7 @@ import calendar
 
 # initialization
 app = Flask(__name__)
-app.config['DEBUG'] = True # enable for local bug hunting
+# app.config['DEBUG'] = True # enable for local bug hunting
 Analytics(app)
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = 'UA-4138452-1'
@@ -49,6 +49,7 @@ SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
 NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook/latest"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/var/www/shogun-toolbox.org/irclogs/"
+ARCHIVES_DIR = "/var/www/shogun-toolbox.org/archives/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
 DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
@@ -82,6 +83,11 @@ def api_static(filename):
 @app.route('/notebook/<path:filename>')
 def notebook_static(filename):
     return send_from_directory(NOTEBOOK_SUBMODULE_DIR, filename)
+
+
+@app.route('/archives/<path:filename>')
+def archives_static(filename):
+    return send_from_directory(ARCHIVES_DIR, filename)
 
 
 @app.route('/')
