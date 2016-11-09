@@ -116,6 +116,8 @@ def docs():
 
 @app.route('/doc/en/<path:filename>')
 def doc(filename):
+    if filename.startswith('current'):
+        filename = filename.replace('current', 'latest')
     return redirect('/api/{path}'.format(path=filename))
 
 
