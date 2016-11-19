@@ -76,7 +76,7 @@ def cookbook_static(filename):
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
 
 
-@app.route('/cookbook/<path:filename>')
+@app.route('/cookbook_pr/<path:filename>')
 def cookbook_pr_static(filename):
     return send_from_directory(COOKBOOK_PR_SUBMODULE_DIR, filename)
 
