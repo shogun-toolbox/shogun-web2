@@ -52,6 +52,7 @@ SHOGUN_IRCLOGS = "/var/www/shogun-toolbox.org/irclogs/"
 ARCHIVES_DIR = "/var/www/shogun-toolbox.org/archives/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
+COOKBOOK_PR_SUBMODULE_DIR = app.root_path + '/static/cookbook_pr/'
 DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
 NOTEBOOK_SUBMODULE_DIR = app.root_path + "/static/notebook/"
 
@@ -73,6 +74,11 @@ def docs_static(filename):
 @app.route('/cookbook/<path:filename>')
 def cookbook_static(filename):
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
+
+
+@app.route('/cookbook/<path:filename>')
+def cookbook_pr_static(filename):
+    return send_from_directory(COOKBOOK_PR_SUBMODULE_DIR, filename)
 
 
 @app.route('/api/<path:filename>')
