@@ -73,9 +73,6 @@ def docs_static(filename):
 
 @app.route('/cookbook/<path:filename>')
 def cookbook_static(filename):
-    if filename.endswith("latest") or filename.endswith("nightly"):
-        filename += "/index.html"
-
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
 
 
@@ -112,7 +109,7 @@ def showroom():
 
 @app.route('/examples')
 def examples():
-    return redirect('/cookbook/latest')
+    return redirect('/cookbook/latest/index.html')
 
 @app.route('/api')
 def api():
