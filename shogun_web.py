@@ -71,8 +71,12 @@ def docs_static(filename):
     return send_from_directory(DOCS_SUBMODULE_DIR, filename)
 
 
+@app.route('/examples')
+@app.route('/examples/<path:filename>')
 @app.route('/cookbook/<path:filename>')
-def cookbook_static(filename):
+def cookbook_static(filename=None):
+    if filename is None:
+        return redirect('/examples/latest/index.html')
     return send_from_directory(COOKBOOK_SUBMODULE_DIR, filename)
 
 
@@ -106,10 +110,6 @@ def showroom():
     notebooks = get_notebooks()
     return render_template('showroom.html', examples=notebooks)
 
-
-@app.route('/examples')
-def examples():
-    return redirect('/cookbook/latest/index.html')
 
 @app.route('/api')
 def api():
