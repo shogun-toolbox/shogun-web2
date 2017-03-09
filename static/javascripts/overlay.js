@@ -6,7 +6,7 @@ $(document).ready(function() {
     $(".overlay-iframe").attr('src', url);
     $(".overlay-new").attr('href', url);
     if (url.indexOf("notebook") != -1) {
-      var nburl="http://cloud.shogun-toolbox.org/notebook" + url.substring(url.lastIndexOf("/"), url.lastIndexOf(".")) + ".ipynb"
+      var nburl="http://cloud.shogun.ml"
       $(".overlay-cloud").attr('href', nburl);
     }
     $(".overlay-bg").fadeIn(500);
