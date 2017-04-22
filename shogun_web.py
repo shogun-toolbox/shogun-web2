@@ -120,6 +120,7 @@ def docs():
     return redirect('https://github.com/shogun-toolbox/shogun/wiki')
 
 @app.route('/mission')
+def mission():
     return redirect('https://github.com/shogun-toolbox/shogun/blob/develop/doc/readme/MISSION.md')
 
 @app.route('/doc/en/<path:filename>')
