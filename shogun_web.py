@@ -121,7 +121,7 @@ def docs():
 
 @app.route('/mission')
 def mission():
-    return redirect('https://github.com/shogun-toolbox/shogun/blob/develop/doc/readme/MISSION.md')
+    return render_template('mission.html')
 
 @app.route('/doc/en/<path:filename>')
 def doc(filename):
