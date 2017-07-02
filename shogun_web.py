@@ -48,7 +48,7 @@ assets.register('js_all', js)
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
-NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook/latest"
+NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/var/www/shogun-toolbox.org/irclogs/"
 ARCHIVES_DIR = "/var/www/shogun-toolbox.org/archives/"
@@ -77,8 +77,13 @@ def sitemap():
         if "GET" in rule.methods and len(rule.arguments)==0:
             pages.append({"url": rule.rule, "lastmod": lastmod})
 
-    pages += get_notebooks()
-    pages += get_cookbooks()
+    pages += get_notebooks(version="latest")
+    pages += get_cookbooks(version="latest")
+    pages += get_html_files(DOXYGEN_SUBMODULE_DIR, "/api")
+    pages += get_notebooks(version="nightly")
+    pages += get_cookbooks(version="nightly")
+    pages += get_html_files(DOXYGEN_SUBMODULE_DIR, "/api", version="nightly")
+
     base_dir = os.path.realpath(os.path.dirname(__file__))
     env = jinja2.Environment(
           autoescape=True,
@@ -205,16 +210,29 @@ def get_sitemap_lastmod(filename):
     return datetime.fromtimestamp(lastmod_epoch).strftime('%Y-%m-%dT%H:%M:%S+01:00')
 
 
-def get_notebooks():
+def get_html_files(base_dir, relative_path, version="latest"):
+    file_list = []
+    relative_path = os.path.join(relative_path, version)
+    for root, subdirs, files in os.walk(os.path.join(base_dir, version)):
+        for file in files:
+            if file.endswith(".html"):
+                url = os.path.join(relative_path, file)
+                lastmod = get_sitemap_lastmod(os.path.join(root, file))
+                file_list.append({'url': url, 'lastmod': lastmod})
+    return file_list
+
+
+def get_notebooks(version='latest'):
     notebooks = []
-    rel_path = "/notebook/latest/"
-    for _file in os.listdir(NOTEBOOK_DIR):
+    rel_path = os.path.join("/notebook", version)
+    versioned_notebook_dir = os.path.join(NOTEBOOK_DIR, version)
+    for _file in os.listdir(versioned_notebook_dir):
         if _file.endswith(".html"):
             notebook_url = rel_path + _file
             notebook_image = notebook_url[:-5] + '.png'
             notebook_title = _file[0:-5].replace('_', ' ')
-            notebook_abstract = get_abstract(os.path.join(NOTEBOOK_DIR, _file.replace('.html', '.ipynb')))
-            notebook_lastmod = get_sitemap_lastmod(os.path.join(NOTEBOOK_DIR, _file))
+            notebook_abstract = get_abstract(os.path.join(versioned_notebook_dir, _file.replace('.html', '.ipynb')))
+            notebook_lastmod = get_sitemap_lastmod(os.path.join(versioned_notebook_dir, _file))
 
             notebooks.append({
                 'url': notebook_url,
@@ -226,10 +244,10 @@ def get_notebooks():
     return notebooks
 
 
-def get_cookbooks():
+def get_cookbooks(version='latest'):
     cookbooks = []
-    rel_path = "/cookbook/latest/examples"
-    for root, subdirs, files in os.walk(os.path.join(COOKBOOK_SUBMODULE_DIR, "latest/examples")):
+    rel_path = os.path.join("/cookbook", version, "examples")
+    for root, subdirs, files in os.walk(os.path.join(COOKBOOK_SUBMODULE_DIR, version, "examples")):
         for file in files:
             if file.endswith(".html"):
                 cookbook_url = os.path.join(rel_path, root.split("examples")[1][1:], file)
