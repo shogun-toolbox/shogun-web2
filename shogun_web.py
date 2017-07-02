@@ -232,7 +232,7 @@ def get_cookbooks():
     for root, subdirs, files in os.walk(os.path.join(COOKBOOK_SUBMODULE_DIR, "latest/examples")):
         for file in files:
             if file.endswith(".html"):
-                cookbook_url = os.path.join(rel_path, root.split("examples")[1], file)
+                cookbook_url = os.path.join(rel_path, root.split("examples")[1][1:], file)
                 cookbook_lastmod = get_sitemap_lastmod(os.path.join(root, file))
                 cookbooks.append({
                     'url': cookbook_url,
