@@ -1,7 +1,9 @@
-from flask import Flask, render_template, redirect, send_from_directory
+from flask import Flask, render_template, redirect, send_from_directory, request, make_response
 from flask.ext.assets import Environment, Bundle
 from flask_analytics import Analytics
 from werkzeug.routing import BaseConverter
+from datetime import datetime, timedelta
+import jinja2
 
 from BeautifulSoup import BeautifulSoup
 from github import Github
@@ -65,10 +67,41 @@ if (os.environ.get('DEV', None)):
     SHOGUN_IRCLOGS = os.path.dirname(os.path.realpath(__file__)) + '/static/irclogs'
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    """Generate sitemap.xml. Makes a list of urls and date modified."""
+    pages = []
+    # static pages
+    lastmod = get_sitemap_lastmod(os.path.dirname(os.path.realpath(__file__)))
+    for rule in app.url_map.iter_rules():
+        if "GET" in rule.methods and len(rule.arguments)==0:
+            pages.append({"url": rule.rule, "lastmod": lastmod})
+
+    pages += get_notebooks()
+    pages += get_cookbooks()
+    base_dir = os.path.realpath(os.path.dirname(__file__))
+    env = jinja2.Environment(
+          autoescape=True,
+          loader=jinja2.FileSystemLoader(
+            os.path.join(base_dir, 'templates')
+          )
+        )
+    url_root = request.url_root[:-1]
+    sitemap_xml = env.get_template("sitemap.xml").render(url_root=url_root, pages=pages)
+    response = make_response(sitemap_xml)
+    response.headers["Content-Type"] = "application/xml"
+    return response
+
+
 @app.route('/docs/<path:filename>')
 def docs_static(filename):
     print app.root_path
     return send_from_directory(DOCS_SUBMODULE_DIR, filename)
+
+
+@app.route('/googlec077134a354808ac.html')
+def google_owner():
+    return 'google-site-verification: googlec077134a354808ac.html'
 
 
 @app.route('/examples')
@@ -167,6 +200,11 @@ def api_redirect(class_name):
 
 
 # utils
+def get_sitemap_lastmod(filename):
+    lastmod_epoch = os.path.getmtime(filename)
+    return datetime.fromtimestamp(lastmod_epoch).strftime('%Y-%m-%dT%H:%M:%S+01:00')
+
+
 def get_notebooks():
     notebooks = []
     rel_path = "/notebook/latest/"
@@ -176,14 +214,30 @@ def get_notebooks():
             notebook_image = notebook_url[:-5] + '.png'
             notebook_title = _file[0:-5].replace('_', ' ')
             notebook_abstract = get_abstract(os.path.join(NOTEBOOK_DIR, _file.replace('.html', '.ipynb')))
+            notebook_lastmod = get_sitemap_lastmod(os.path.join(NOTEBOOK_DIR, _file))
 
             notebooks.append({
                 'url': notebook_url,
                 'image': notebook_image,
                 'title': notebook_title,
-                'abstract': notebook_abstract})
+                'abstract': notebook_abstract,
+                'lastmod': notebook_lastmod})
 
     return notebooks
+
+
+def get_cookbooks():
+    cookbooks = []
+    rel_path = "/cookbook/latest/examples"
+    for root, subdirs, files in os.walk(os.path.join(COOKBOOK_SUBMODULE_DIR, "latest/examples")):
+        for file in files:
+            if file.endswith(".html"):
+                cookbook_url = os.path.join(rel_path, root.split("examples")[1], file)
+                cookbook_lastmod = get_sitemap_lastmod(os.path.join(root, file))
+                cookbooks.append({
+                    'url': cookbook_url,
+                    'lastmod': cookbook_lastmod})
+    return cookbooks
 
 
 def get_abstract(fname):
