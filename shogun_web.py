@@ -1,9 +1,11 @@
-from flask import Flask, render_template, redirect, send_from_directory, request, make_response
+from flask import Flask, Markup, render_template, redirect, send_from_directory, request, make_response
 from flask.ext.assets import Environment, Bundle
 from flask_analytics import Analytics
 from werkzeug.routing import BaseConverter
+from werkzeug.contrib.cache import SimpleCache
 from datetime import datetime, timedelta
 import jinja2
+import markdown
 
 from BeautifulSoup import BeautifulSoup
 from github import Github
@@ -19,6 +21,7 @@ app = Flask(__name__)
 Analytics(app)
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ENABLED'] = True
 app.config['ANALYTICS']['GOOGLE_CLASSIC_ANALYTICS']['ACCOUNT'] = 'UA-4138452-1'
+cache = SimpleCache()
 
 
 # api docs regex converter
@@ -140,7 +143,8 @@ def archives_static(filename):
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    about = get_markuped("about", "docs/ABOUT.md")
+    return render_template('home.html', **locals())
 
 
 @app.route('/showroom')
@@ -157,9 +161,12 @@ def api():
 def docs():
     return redirect('https://github.com/shogun-toolbox/shogun/wiki')
 
+
 @app.route('/mission')
 def mission():
-    return render_template('mission.html')
+    mission = get_markuped("mission", "docs/MISSION.md")
+    return render_template('mission.html', **locals())
+
 
 @app.route('/doc/en/<path:filename>')
 def doc(filename):
@@ -170,7 +177,8 @@ def doc(filename):
 
 @app.route('/install')
 def install():
-    return render_template('install.html')
+    install_content = get_markuped("install", "docs/INSTALL.md")
+    return render_template('install.html', **locals())
 
 
 @app.route('/irclogs')
@@ -280,6 +288,16 @@ def get_abstract(fname):
     except:
         pass
     return os.path.basename(fname)
+
+
+def get_markuped(key, filename):
+    content = cache.get(key)
+    if content is None:
+        with open(os.path.join(app.root_path, filename)) as f:
+            content = ''.join(f.readlines())
+        content = Markup(markdown.markdown(content))
+        cache.set(key, content, timeout=0)
+    return content
 
 
 # make sure to use the 'raw' file url
