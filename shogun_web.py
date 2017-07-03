@@ -236,7 +236,7 @@ def get_notebooks(version='latest'):
     versioned_notebook_dir = os.path.join(NOTEBOOK_DIR, version)
     for _file in os.listdir(versioned_notebook_dir):
         if _file.endswith(".html"):
-            notebook_url = rel_path + _file
+            notebook_url = os.path.join(rel_path, _file)
             notebook_image = notebook_url[:-5] + '.png'
             notebook_title = _file[0:-5].replace('_', ' ')
             notebook_abstract = get_abstract(os.path.join(versioned_notebook_dir, _file.replace('.html', '.ipynb')))
