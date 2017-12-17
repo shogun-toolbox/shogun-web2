@@ -1,5 +1,8 @@
 from flask import Flask, Markup, render_template, redirect, send_from_directory, request, make_response
-from flask.ext.assets import Environment, Bundle
+try:
+    from flask_assets import Environment, Bundle
+except:
+    from flask.ext.assets import Environment, Bundle
 from flask_analytics import Analytics
 from werkzeug.routing import BaseConverter
 from werkzeug.contrib.cache import SimpleCache
