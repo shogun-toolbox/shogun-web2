@@ -54,7 +54,7 @@ assets.register('js_all', js)
 
 # constants
 SHOWCASE_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/showcase"
-NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebook"
+NOTEBOOK_DIR = os.path.dirname(os.path.realpath(__file__)) + "/static/notebooks"
 DEMO_DIR = os.path.dirname(os.path.realpath(__file__)) + "/../shogun-demo"
 SHOGUN_IRCLOGS = "/var/www/shogun-toolbox.org/irclogs/"
 ARCHIVES_DIR = "/var/www/shogun-toolbox.org/archives/"
@@ -273,6 +273,7 @@ def get_abstract(fname):
     import json
     import os
     import markdown
+    import traceback
 
     try:
         js = json.load(file(fname))
@@ -286,9 +287,14 @@ def get_abstract(fname):
                 cells = js['cells']
 
         for cell in cells:
+            if (cell['cell_type'] == 'heading' or cell['cell_type'] == 'markdown') and cell.has_key('source') and ''.join(cell['source']).find('This notebook is about') != -1:
+                return markdown.markdown(''.join(cell['source']).replace('#',''))
+
+        for cell in cells:
             if cell['cell_type'] == 'heading' or cell['cell_type'] == 'markdown':
                 return markdown.markdown(''.join(cell['source']).replace('#',''))
     except:
+        print traceback.format_exc()
         pass
     return os.path.basename(fname)
 
