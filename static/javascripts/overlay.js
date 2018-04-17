@@ -5,10 +5,6 @@ $(document).ready(function() {
     var url=$(this).attr("href");
     $(".overlay-iframe").attr('src', url);
     $(".overlay-new").attr('href', url);
-    if (url.indexOf("notebook") != -1) {
-      var nburl="http://cloud.shogun.ml"
-      $(".overlay-cloud").attr('href', nburl);
-    }
     $(".overlay-bg").fadeIn(500);
   });
 
