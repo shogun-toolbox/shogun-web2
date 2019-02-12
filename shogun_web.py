@@ -106,7 +106,7 @@ def sitemap():
 
 @app.route('/docs/<path:filename>')
 def docs_static(filename, template='doc.html'):
-    doc_content = get_markuped(filename.lower(), "docs/%s" % filename)
+    doc_content = get_markuped(filename.lower(), "docs/{}".format(filename))
     return render_template(template, **locals())
 
 
