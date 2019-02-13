@@ -105,9 +105,9 @@ def sitemap():
 
 
 @app.route('/docs/<path:filename>')
-def docs_static(filename):
-    print app.root_path
-    return send_from_directory(DOCS_SUBMODULE_DIR, filename)
+def docs_static(filename, template='doc.html'):
+    doc_content = get_markuped(filename.lower(), "docs/{}".format(filename))
+    return render_template(template, **locals())
 
 
 @app.route('/googlec077134a354808ac.html')
@@ -146,8 +146,7 @@ def archives_static(filename):
 
 @app.route('/')
 def index():
-    about = get_markuped("about", "docs/ABOUT.md")
-    return render_template('home.html', **locals())
+    return docs_static('ABOUT.md', 'home.html')
 
 
 @app.route('/showroom')
@@ -167,8 +166,7 @@ def docs():
 
 @app.route('/mission')
 def mission():
-    mission = get_markuped("mission", "docs/MISSION.md")
-    return render_template('mission.html', **locals())
+    return docs_static('MISSION.md')
 
 
 @app.route('/doc/en/<path:filename>')
@@ -180,8 +178,7 @@ def doc(filename):
 
 @app.route('/install')
 def install():
-    install_content = get_markuped("install", "docs/INSTALL.md")
-    return render_template('install.html', **locals())
+    return docs_static('INSTALL.md')
 
 
 @app.route('/irclogs')
