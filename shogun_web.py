@@ -61,7 +61,7 @@ ARCHIVES_DIR = "/var/www/shogun-toolbox.org/archives/"
 DOCS_SUBMODULE_DIR = app.root_path + '/docs/'
 COOKBOOK_SUBMODULE_DIR = app.root_path + '/static/cookbook/'
 COOKBOOK_PR_SUBMODULE_DIR = app.root_path + '/static/cookbook_pr/'
-DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/api/'
+DOXYGEN_SUBMODULE_DIR = app.root_path + '/static/doxygen/'
 NOTEBOOK_SUBMODULE_DIR = app.root_path + "/static/notebook/"
 
 # if dev environment
